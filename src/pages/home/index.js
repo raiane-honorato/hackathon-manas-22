@@ -5,7 +5,7 @@ import { dictionary } from "../../assets/translate";
 import { Button, WhiteButton } from "../../styles/button";
 import { useState } from "react";
 import ListPopUp from "../../components/PopUp/ListPopUp";
-import createList from "./../../services/services";
+import createList from "../../services/services";
 import Services from "../../services";
 
 function Home() {

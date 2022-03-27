@@ -22,6 +22,11 @@ export const WhiteButton = styled(Button)`
     color: ${ ( {theme} ) => theme.colors.primaryPurple};
 `
 
+export const PurpleButton = styled(Button)`
+    color: white;
+    background-color: ${ ( {theme} ) => theme.colors.primaryPurple};
+`
+
 export const GreenButton = styled(Button)`
     color: ${ ( {theme} ) => theme.colors.primaryPurple};
     background-color: ${ ( {theme} ) => theme.colors.primaryGreen};

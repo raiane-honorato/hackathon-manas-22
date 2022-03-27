@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { db } from '../firebase-config';
-import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc, getDoc } from 'firebase/firestore';
+import { useParams } from "react-router";
 
 function List() {
-
+    const parameter = useParams();
+    console.log(parameter);
     return(
         <>
         <p>Hello</p>

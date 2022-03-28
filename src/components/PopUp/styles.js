@@ -11,6 +11,8 @@ export const PopUpContainer = styled.div`
     border: 1px solid black;
     position: absolute;
     height: 60vh;
+    top: 20vh;
+    right: 10vw;
     padding: 16px;
 
     .close-btn-wrapper {
@@ -32,15 +34,19 @@ export const PopUpContainer = styled.div`
         width: calc(100% - 10px);
         margin-top: 30px;
         padding: 0 10px;
-
-        input {
-            width: 80%;
-        }
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
         div {
             margin-top: 10px;
             display: flex;
             align-items: center;
+            width: 100%;
+        }
+
+        button {
+            margin-top: 10px;
         }
     }
 

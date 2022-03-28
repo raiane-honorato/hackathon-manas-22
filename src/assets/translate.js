@@ -8,5 +8,6 @@ export const dictionary = {
     'label_link': 'Link',
     'label_copy': 'Copiar',
     'label_go_list': 'Ir para lista',
-    'label_access_link': 'Insira aqui seu link de acesso'
+    'label_access_link': 'Insira aqui seu link de acesso',
+    'label_invalid_link': 'link inválido'
 }

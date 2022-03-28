@@ -19,7 +19,7 @@ function Home() {
     Services.createList("Nome da lista", "").then(
       res => {
         setListId(res);
-        setListLink(`${window.location.origin}/${res}`);
+        setListLink(`${window.location.origin}/list/${res}`);
       });
     setListOpen(true);
   }
@@ -31,10 +31,10 @@ function Home() {
       <p>{dictionary['text_home']}</p>
       <div className = "buttonWrap">
         <WhiteButton onClick = {() => {createNewList(); setHasList(false)}}> {dictionary['label_create_list']} </WhiteButton>
-        <WhiteButton onClick = {() => {setHasList(true); setListOpen(true)}}> {dictionary['label_has_list']} </WhiteButton>
+        <WhiteButton onClick = {() => {setHasList(true); setListOpen(true); setListLink('')}}> {dictionary['label_has_list']} </WhiteButton>
       </div>
     </HomeContainer>
-    {listOpen && <ListPopUp linkText={listLink} setLinkText={setListLink} listId={listId} hasList={hasList} setListOpen={setListOpen} />}
+    {listOpen && <ListPopUp linkText={listLink} setLinkText={setListLink} listId={listId} hasList={hasList} listOpen = {listOpen} setListOpen={setListOpen} setListId={setListId}/>}
     </>
 
   )

@@ -40,7 +40,6 @@ export const Navbar = styled.div`
 
 export const ListName = styled.div`
     width: 100%;
-    height: 90px;
     display: flex;
     gap: 10px;
     align-items: center;
@@ -60,12 +59,18 @@ export const ListName = styled.div`
 
 export const ToDoWrapper = styled.div`
     width: 100%;
-    height: 90px;
     display: flex;
-    gap: 10px;
+    flex-direction: column;
     align-items: center;
     padding: 5px 15px;
 
+`
+
+export const ToDoItemTutorialWrap = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid ${ ( {theme} ) => theme.colors.primaryGray};
 `
 
 export const ToDoItemWrap = styled.div`
@@ -75,35 +80,34 @@ export const ToDoItemWrap = styled.div`
     gap: 10px;
     align-items: center;
     padding: 5px 15px;
-    background-color: ${ ( {theme} ) => theme.colors.primaryGray};
-    border-radius: 15px;
+    /* background-color: ${ ( {theme} ) => theme.colors.primaryGray}; */
+    /* border-radius: 15px; */
+    justify-content: space-between;
 
-    .avatar-wrapp {
-        width: 60px;
+    .avatar-name-wrapp{
         display: flex;
-        align-items: center;
-        img {
-            height: 25px;
+        .avatar-wrapp {
+            width: 60px;
+            display: flex;
+            align-items: center;
         }
     }
 
     .doubt-btn {
-        width: 25px;
-        height: 25px;
+        width: 30px;
+        height: 30px;
         background-color: ${ ( {theme} ) => theme.colors.softGreen};
         color: ${ ( {theme} ) => theme.colors.primaryPurple};
         font-weight: bolder;
-        font-size: 15px;
+        font-size: 16px;
         border-radius: 100%;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-        justify-self: end;
     }
 
 
 
     /* The checkbox-container */
     .checkbox-container {
-    width: 250px;
     display: block;
     position: relative;
     padding-left: 35px;

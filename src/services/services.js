@@ -136,7 +136,7 @@ const addUserToList = async (listId, avatar, name, stars) => {
     }
 };
 
-const addTaskToList = async (listId, name, renew_time, status, type_id, userList) => {
+const addTaskToList = async (listId, name, renew_time, status, type_id, userList, created_at) => {
     const taskListCollectionRef = collection(db, `/list/${listId}/task_list`);
     const taskTypeRef = doc(db, "task", type_id);
     const responsableList = userList.map(userId => doc(db, `/list/${listId}/users`, userId));
@@ -145,6 +145,7 @@ const addTaskToList = async (listId, name, renew_time, status, type_id, userList
             name,
             renew_time,
             status,
+            created_at,
             type_id: taskTypeRef,
             responsable_list: responsableList
         });
@@ -189,7 +190,7 @@ const updateUser = async (listId, userId, avatar, name, stars) => {
     }
 };
 
-const updateTask = async (listId, taskId, name, renew_time, status, type_id, userList) => {
+const updateTask = async (listId, taskId, name, renew_time, status, type_id, userList, created_at) => {
     const taskRef = doc(db, `/list/${listId}/task_list`, taskId);
     const taskTypeRef = doc(db, "task", type_id);
     const responsableList = userList.map(userId => doc(db, `/list/${listId}/users`, userId));
@@ -197,6 +198,7 @@ const updateTask = async (listId, taskId, name, renew_time, status, type_id, use
         name,
         renew_time,
         status,
+        created_at,
         type_id: taskTypeRef,
         responsable_list: responsableList
     };

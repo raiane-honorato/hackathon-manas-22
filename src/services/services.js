@@ -7,7 +7,9 @@ import {
     updateDoc,
     doc,
     deleteDoc,
-    getDoc
+    getDoc,
+    query,
+    where
 } from 'firebase/firestore';
 
 
@@ -81,6 +83,23 @@ const getTaskById = async (listId, taskId) => {
             type_id: taskSnap.data().type_id.id
         };
         return (task);
+    } else {
+        return null;
+    }
+};
+
+const getTaskTypeList = async (type="") => {
+    let taskTypeCollection = collection(db, `/task`);
+    if(type) {
+        taskTypeCollection = query(taskTypeCollection, where("type", "==", type))
+    }
+    const taskTypeSnap = await getDocs(taskTypeCollection);
+    if (!taskTypeSnap.empty) {
+        const taskTypes = taskTypeSnap.docs.map(doc => ({
+            ...doc.data(),
+            id: doc.id
+        }));
+        return (taskTypes);
     } else {
         return null;
     }
@@ -250,6 +269,7 @@ export default {
     getTasksList,
     getUserById,
     getTaskById,
+    getTaskTypeList,
     getTaskTypeById,
     createList,
     addUserToList,

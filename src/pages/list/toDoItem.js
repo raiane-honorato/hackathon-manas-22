@@ -6,6 +6,7 @@ import { CleanButton } from "../../styles/button";
 import { getAvatar } from "./../../assets/getAvatar";
 import { Avatar, AvatarGroup, Checkbox, FormControlLabel } from "@mui/material";
 import Tutorial from "../../components/tutorial";
+import { PurpleCheckbox } from "../../styles/checkbox";
 
 function ToDoItem({task, listId}) {
     const [users, setUsers] = useState([]);
@@ -47,16 +48,17 @@ function ToDoItem({task, listId}) {
                 ))}
               </AvatarGroup>
             </div>
-            <label className="checkbox-container">{task.name}
-              <input type="checkbox" checked={done} onClick={() => setDone(!done)} ></input>
-              <span class="checkmark"></span>
-            </label>
+            <PurpleCheckbox>
+              <label className="checkbox-container">{task.name}
+                <input type="checkbox" checked={done} onClick={() => setDone(!done)} ></input>
+                <span class="checkmark"></span>
+              </label>
+            </PurpleCheckbox>
           </div>
           
           {type.tutorial &&
             <CleanButton className="doubt-btn" onClick={() => setTutorialOpen(!tutorialOpen)}>?</CleanButton>
           }
-
 
         </ToDoItemWrap>
         {tutorialOpen &&

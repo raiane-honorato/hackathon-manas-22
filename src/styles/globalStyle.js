@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Inter', sans-serif;
     margin: 0;
     font-family: 'Montserrat', sans-serif;
+    color: ${ ( {theme} ) => theme.colors.textGray}
 }
 
 `

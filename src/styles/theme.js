@@ -5,10 +5,12 @@ export const theme = {
         primaryPurple: "#59194F",
         primaryPink: "#F2BDD6",
         primaryGreen: "#04BF9D",
-				primaryGray:"#f0f0f0",
-				secondPink: '#F2BDD6',
-				navColor: 'rgba(242, 189, 214, 0.24)',
-				softGreen: '#D6EFEB'
+		primaryGray:"#f0f0f0",
+		secondPink: '#F2BDD6',
+		navColor: 'rgba(242, 189, 214, 0.24)',
+		softGreen: '#D6EFEB',
+        softPink: '#E8D1DC',
+        textGray: '#383838'
     }
 }
 

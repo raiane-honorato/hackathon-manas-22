@@ -94,4 +94,8 @@ export const TaskWrapper = styled.div`
         
       }
     }
+
+    .add-task-btn {
+      margin-top: 100px;
+    }
 `

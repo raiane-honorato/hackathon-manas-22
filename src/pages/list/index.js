@@ -18,13 +18,13 @@ function List() {
 
   useEffect(() => {
     Services.getListById(listId).then(
-      res => setList(res)
+      res => setList(res.data)
     )
   }, []);
 
   useEffect(() => {
     Services.getTasksList(listId).then(
-      res => setTasks(res)
+      res => setTasks(res.data)
     )
   }, [listId]);
 

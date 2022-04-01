@@ -18,8 +18,8 @@ function Home() {
   const createNewList = () => {
     Services.createList("Nome da lista", "").then(
       res => {
-        setListId(res);
-        setListLink(`${window.location.origin}/list/${res}`);
+        setListId(res.data);
+        setListLink(`${window.location.origin}/list/${res.data}`);
       });
     setListOpen(true);
   }

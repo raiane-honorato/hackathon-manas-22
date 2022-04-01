@@ -12,6 +12,7 @@ export const dictionary = {
     'label_invalid_link': 'link inválido',
     'label_tutorial': 'Assista ao tutorial:',
     'label_add_task': 'Adicionar tarefa',
+    'label_edit_task': 'Editar tarefa',
     'label_adult': 'Adulto',
     'label_child': 'Infantil',
     'label_task': 'Tarefa',

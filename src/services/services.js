@@ -12,7 +12,6 @@ import {
     where
 } from 'firebase/firestore';
 
-
 const getListById = async (listId) => {
     const listCollectionRef = collection(db, "list");
     const listRef = doc(db, "list", listId);
@@ -22,9 +21,9 @@ const getListById = async (listId) => {
             ...listSnap.data(),
             id: listSnap.id
         }
-        return (list);
+        return ({status: 200, data: list});
     } else {
-        return null;
+        return ({status: 404});
     }
 };
 
@@ -36,9 +35,9 @@ const getUsersList = async (listId) => {
             ...doc.data(),
             id: doc.id
         }));
-        return (users);
+        return ({status: 200, data: users});
     } else {
-        return null;
+        return ({status: 404});
     }
 };
 
@@ -52,9 +51,9 @@ const getTasksList = async (listId) => {
             responsable_list: doc.data().responsable_list.map(doc => (doc.id)),
             type_id: doc.data().type_id.id
         }));
-        return (taskList);
+        return ({status: 200, data: taskList});
     } else {
-        return null;
+        return ({status: 404});
     }
 };
 
@@ -66,9 +65,9 @@ const getUserById = async (listId, userId) => {
             ...userSnap.data(),
             id: userSnap.id
         };
-        return (users);
+        return ({status: 200, data: users});
     } else {
-        return null;
+        return ({status: 404});
     }
 };
 
@@ -82,9 +81,9 @@ const getTaskById = async (listId, taskId) => {
             responsable_list: taskSnap.data().responsable_list.map(doc => (doc.id)),
             type_id: taskSnap.data().type_id.id
         };
-        return (task);
+        return ({status: 200, data: task});
     } else {
-        return null;
+        return ({status: 404});
     }
 };
 
@@ -99,9 +98,9 @@ const getTaskTypeList = async (type="") => {
             ...doc.data(),
             id: doc.id
         }));
-        return (taskTypes);
+        return ({status: 200, data: taskTypes});
     } else {
-        return null;
+        return ({status: 404});
     }
 };
 
@@ -113,9 +112,9 @@ const getTaskTypeById = async (taskTypeId) => {
             ...taskSnap.data(),
             id: taskSnap.id
         }
-        return (taskType);
+        return ({status: 200, data: taskType});
     } else {
-        return null;
+        return ({status: 404});
     }
 }
 
@@ -135,9 +134,9 @@ const createList = async (name, reward) => {
             name,
             reward
         });
-        return newList.id;
+        return {status: 201, data: newList.id};
     } catch (e) {
-        return e;
+        return {status: 400, error: e};
     }
 };
 
@@ -149,9 +148,9 @@ const addUserToList = async (listId, avatar, name, stars) => {
             name,
             stars
         });
-        return newUser.id;
+        return ({status: 201, data: newUser.id});
     } catch (e) {
-        return e;
+        return ({status: 400, error: e});
     }
 };
 
@@ -164,13 +163,13 @@ const addTaskToList = async (listId, name, renew_time, status, type_id, userList
             name,
             renew_time,
             status,
-            created_at,
+            created_at: Date.now(),
             type_id: taskTypeRef,
             responsable_list: responsableList
         });
-        return newTask.id;
+        return ({status: 201, data: newTask.id});
     } catch (e) {
-        return e;
+        return ({status: 400, error: e});
     }
 };
 
@@ -188,9 +187,9 @@ const updateList = async (listId, name, reward) => {
     };
     try {
         await updateDoc(listDoc, newFields);
-        return true;
+        return ({status: 204});
     } catch (e) {
-        return e;
+        return ({status: 400, error: e});
     }
 };
 
@@ -203,9 +202,9 @@ const updateUser = async (listId, userId, avatar, name, stars) => {
     };
     try {
         await updateDoc(userRef, newFields);
-        return true;
+        return ({status: 204});
     } catch (e) {
-        return e;
+        return ({status: 400, error: e});
     }
 };
 
@@ -223,9 +222,9 @@ const updateTask = async (listId, taskId, name, renew_time, status, type_id, use
     };
     try {
         await updateDoc(taskRef, newFields);
-        return true;
+        return ({status: 204});
     } catch (e) {
-        return e;
+        return ({status: 400, error: e});
     }
 };
 
@@ -237,9 +236,9 @@ const deleteList = async (listId) => {
     const listDoc = doc(db, "list", listId);
     try {
         await deleteDoc(listDoc);
-        return true;
+        return ({status: 204});
     } catch (e) {
-        return e;
+        return ({status: 400, error: e});
     }
 };
 
@@ -247,9 +246,9 @@ const deleteUser = async (listId, userId) => {
     const userRef = doc(db, `/list/${listId}/users`, userId);
     try {
         await deleteDoc(userRef);
-        return true;
+        return ({status: 204});
     } catch (e) {
-        return e;
+        return ({status: 400, error: e});
     }
 };
 
@@ -257,9 +256,9 @@ const deleteTask = async (listId, taskId) => {
     const taskRef = doc(db, `/list/${listId}/task_list`, taskId);
     try {
         await deleteDoc(taskRef);
-        return true;
+        return ({status: 204});
     } catch (e) {
-        return e;
+        return ({status: 400, error: e});
     }
 };
 

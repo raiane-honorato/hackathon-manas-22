@@ -2,50 +2,98 @@ import { NavLink, useParams } from "react-router-dom";
 import { TaskWrapper } from "./styles";
 import backButton from "./../../assets/back-btn.svg";
 import { useEffect, useState } from "react";
-import { CleanButton, WhiteButton } from "../../styles/button";
+import { CleanButton, PurpleButton, WhiteButton } from "../../styles/button";
 import { dictionary } from "../../assets/translate";
-import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import Services from "../../services";
 import Tutorial from "../../components/tutorial";
 import { PurpleCheckbox } from "../../styles/checkbox";
 
 function Task() {
   const {listId, taskId} = useParams();
+
   const [activeCategory, setActiveCategory] = useState('adult');
+  const [tutorialOpen, setTutorialOpen] = useState(false);
+  const [recurrentTask, setRecurrentTask] = useState(false);
+
+
   const [users, setUsers] = useState([]);
   const [taskTypeList, setTaskTypeList] = useState([]);
-  const [type, setType] = useState({});
-  const [tutorialOpen, setTutorialOpen] = useState(false);
-  const [responsable, setResponsable] = useState([]);
-  const [recurrentTask, setRecurrentTask] = useState(false);
-  const [recurrency, setRecurrency] = useState(0);
 
-  useEffect(() => {
-    console.log('users::::::',users,"task Type::::::", taskTypeList);
-    console.log("responsable:::::", responsable)
-  }, [users, taskTypeList, responsable])
+  const [taskState, setTaskState] = useState({
+    name: null,
+    renew_time: 0,
+    status: false,
+    type_id: null,
+    responsable_list: [],
+    created_at: null
+  });
+
+  const [type, setType] = useState({});
+  const [responsable, setResponsable] = useState([]);
+  const [recurrency, setRecurrency] = useState(0);
+  const [hasTask, setHasTask] = useState(false);
+
+
 
   useEffect(() => {
     Services.getUsersList(listId).then(
-      res => setUsers(res)
+      res => setUsers(res.data)
     )
 
     Services.getTaskTypeList(activeCategory).then(
-      res => setTaskTypeList(res)
+      res => setTaskTypeList(res.data)
     )
-  }, [activeCategory]); 
+  }, [activeCategory]);
+
+  useEffect(async () => {
+    if(taskId) {
+      const res = await Services.getTaskById(listId, taskId);
+      setTaskState(res.data);
+      setHasTask(true);
+    }
+  },[]);
 
   const handleResponsableChange = (event) => {
-    const value = event.target.value;
-    console.log("value:::", typeof value === 'string')
-    setResponsable(typeof value === 'string' ? value.split(',') : value );
-  }
+    let value = event.target.value;
+    if(typeof value === 'string') {
+      value = value.split(',');
+    } 
+    setTaskState({...taskState, responsable_list: value});
+  };
+
+  const handleTaskTypeChange = (event) => {
+    let value = event.target.value;
+
+    const selectedType = taskTypeList.filter(taskType => taskType.id == value)[0];
+    setType(selectedType);
+    setTaskState({...taskState, type_id: value, name: selectedType.label});
+  };
+
+  const addTask = async () => {
+    const response = await Services.addTaskToList(listId, ...Object.values(taskState));
+    console.log(response);
+  };
+
+  const editTask = async () => {
+    const response = await Services.updateTask(
+      listId, 
+      taskId, 
+      taskState.name, 
+      taskState.renew_time, 
+      taskState.status, 
+      taskState.type_id, 
+      taskState.responsable_list, 
+      taskState.created_at
+      );
+    console.log(response);
+  };
 
   return(
     <TaskWrapper>
       <div className="go-back-categories-wrapp">
         <NavLink to={`/list/${listId}`}><img src={backButton}/></NavLink>
-        <span>{dictionary['label_add_task']}</span>
+        <span>{hasTask ? dictionary['label_edit_task'] : dictionary['label_add_task']}</span>
         <div className="categories-wrapp">
           <WhiteButton 
           className={`category ${(activeCategory == 'adult') && 'cat-active'}`}
@@ -68,19 +116,21 @@ function Task() {
           <InputLabel id="task-form-id">{dictionary['label_task']}</InputLabel>
           <Select
             labelId="task-form-id"
-            value={type}
+            value={taskState.type_id}
             label={dictionary['label_task']}
-            onChange={(e) => setType(e.target.value)}
+            onChange={handleTaskTypeChange}
             color="secondary"
           >
             {taskTypeList && taskTypeList.map((taskType) => {
-              return(<MenuItem value={taskType}>{taskType.label}</MenuItem>)
+              return(<MenuItem value={taskType.id}>{taskType.label}</MenuItem>)
             }
             )}
           </Select>
         </FormControl>
 
-        <CleanButton onClick={() => setTutorialOpen(!tutorialOpen)}>{dictionary['label_how_to_do_it']}</CleanButton>
+        <CleanButton onClick={() => setTutorialOpen(!tutorialOpen)}>
+          {dictionary['label_how_to_do_it']}
+        </CleanButton>
       </div>
 
       {tutorialOpen &&
@@ -93,13 +143,13 @@ function Task() {
           <Select
             labelId="responsable-form-id"
             multiple
-            value={responsable}
+            value={taskState.responsable_list}
             label={dictionary['label_responsable']}
             onChange={handleResponsableChange}
             color="secondary"
           >
             {users && users.map((user) => {
-              return(<MenuItem key={user.name} value={user}>{user.name}</MenuItem>)
+              return(<MenuItem key={user.name} value={user.id}>{user.name}</MenuItem>)
             }
             )}
           </Select>
@@ -111,10 +161,14 @@ function Task() {
       <div className="recurrent-wrap">
         <PurpleCheckbox>
           <label className="checkbox-container">{dictionary['label_recurrent_task']}
-            <input type="checkbox" checked={recurrentTask} onClick={() => setRecurrentTask(!recurrentTask)} ></input>
+            <input type="checkbox" 
+              checked={recurrentTask} 
+              onClick={() => setRecurrentTask(!recurrentTask)} 
+            ></input>
             <span class="checkmark"></span>
           </label>
         </PurpleCheckbox>
+
         {recurrentTask &&
           <div className="description-recurrent-wrap">
             <span className="desc-recurrent">{dictionary['label_desc_recurrent']}</span>
@@ -123,9 +177,9 @@ function Task() {
               <InputLabel id="recurrency-form-id">{dictionary['label_recurrency']}</InputLabel>
               <Select
                 labelId="recurrency-form-id"
-                value={recurrency}
+                value={taskState.renew_time}
                 label={dictionary['label_recurrency']}
-                onChange={(e) => setRecurrency(e.target.value)}
+                onChange={(e) => setTaskState({...taskState, renew_time: e.target.value})}
                 color="secondary"
               >
                 {[1,2,3,4,5,6,7].map((value) => {
@@ -137,6 +191,13 @@ function Task() {
           </div>
         }
       </div>
+
+      <PurpleButton 
+        className="add-task-btn" 
+        onClick={() => {hasTask ? editTask() : addTask()}}
+      >
+        {hasTask ? dictionary['label_edit_task'] : dictionary['label_add_task']}
+      </PurpleButton>
 
     </TaskWrapper>
   )

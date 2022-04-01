@@ -1,4 +1,4 @@
-import { NavLink, useParams } from "react-router-dom";
+import { BrowserRouter, NavLink, useNavigate, useParams } from "react-router-dom";
 import { TaskWrapper } from "./styles";
 import backButton from "./../../assets/back-btn.svg";
 import { useEffect, useState } from "react";
@@ -8,9 +8,11 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import Services from "../../services";
 import Tutorial from "../../components/tutorial";
 import { PurpleCheckbox } from "../../styles/checkbox";
+import SnackbarComp from "../../components/Snackbar";
 
 function Task() {
   const {listId, taskId} = useParams();
+  let navigate = useNavigate();
 
   const [activeCategory, setActiveCategory] = useState('adult');
   const [tutorialOpen, setTutorialOpen] = useState(false);
@@ -30,11 +32,18 @@ function Task() {
   });
 
   const [type, setType] = useState({});
-  const [responsable, setResponsable] = useState([]);
-  const [recurrency, setRecurrency] = useState(0);
   const [hasTask, setHasTask] = useState(false);
-
-
+  const [snackState, setSnackState] = useState({
+    open: false,
+    type: "success",
+    duration: 1000,
+    message: dictionary['label_success_add_task'],
+    handleClose: (() => {
+      setSnackState({...snackState, open: false});
+      navigate(`/list/${listId}`);
+      }
+      )
+  });
 
   useEffect(() => {
     Services.getUsersList(listId).then(
@@ -72,7 +81,12 @@ function Task() {
 
   const addTask = async () => {
     const response = await Services.addTaskToList(listId, ...Object.values(taskState));
-    console.log(response);
+    console.log(response)
+    if(response.status === 201) {
+      setSnackState({...snackState, open: true, type: "success", message: dictionary['label_success_add_task']})
+    } else {
+      setSnackState({...snackState, open: false, type: "error", message: dictionary['label_error']})
+    }
   };
 
   const editTask = async () => {
@@ -86,11 +100,24 @@ function Task() {
       taskState.responsable_list, 
       taskState.created_at
       );
-    console.log(response);
+      if(response.status === 204) {
+        setSnackState({...snackState, open: true, type: "success", message: dictionary['label_success_edit_task']})
+      } else {
+        setSnackState({...snackState, open: false, type: "error", message: dictionary['label_error']})
+      }
   };
 
   return(
     <TaskWrapper>
+
+      <SnackbarComp 
+        open={snackState.open} 
+        type={snackState.type} 
+        duration={snackState.duration} 
+        message={snackState.message} 
+        handleClose={snackState.handleClose} 
+      />
+
       <div className="go-back-categories-wrapp">
         <NavLink to={`/list/${listId}`}><img src={backButton}/></NavLink>
         <span>{hasTask ? dictionary['label_edit_task'] : dictionary['label_add_task']}</span>

@@ -12,7 +12,7 @@ export const dictionary = {
     'label_invalid_link': 'link inválido',
     'label_tutorial': 'Assista ao tutorial:',
     'label_add_task': 'Adicionar tarefa',
-    'label_edit_task': 'Editar tarefa',
+    'label_edit_task': 'Salvar tarefa',
     'label_adult': 'Adulto',
     'label_child': 'Infantil',
     'label_task': 'Tarefa',
@@ -22,5 +22,8 @@ export const dictionary = {
     'label_recurrent_task': 'Tarefa recorrente',
     'label_desc_recurrent': 'Esta tarefa irá ser renovada automaticamente.',
     'label_question_recurrent': 'Renovar a tarefa a cada quantos dias?',
-    'label_recurrency': 'Recorrência'
+    'label_recurrency': 'Recorrência',
+    'label_success_add_task': 'Tarefa adicionada com sucesso!',
+    'label_success_edit_task': 'Tarefa alterada com sucesso!',
+    'label_error': 'Ocorreu um erro nesta operação. Tente novamente mais tarde'
 }

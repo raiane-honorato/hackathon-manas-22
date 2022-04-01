@@ -2,7 +2,7 @@ import { BrowserRouter, NavLink, useNavigate, useParams } from "react-router-dom
 import { TaskWrapper } from "./styles";
 import backButton from "./../../assets/back-btn.svg";
 import { useEffect, useState } from "react";
-import { CleanButton, PurpleButton, WhiteButton } from "../../styles/button";
+import { CleanButton, PurpleButton, TransButton, WhiteButton } from "../../styles/button";
 import { dictionary } from "../../assets/translate";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import Services from "../../services";
@@ -60,6 +60,9 @@ function Task() {
       const res = await Services.getTaskById(listId, taskId);
       setTaskState(res.data);
       setHasTask(true);
+      if(res.data.renew_time > 0) {
+        setRecurrentTask(true);
+      }
     }
   },[]);
 
@@ -106,6 +109,15 @@ function Task() {
         setSnackState({...snackState, open: false, type: "error", message: dictionary['label_error']})
       }
   };
+
+  const deleteTask = async () => {
+    const response = await Services.deleteTask(listId, taskId);
+    if(response.status === 204) {
+      setSnackState({...snackState, open: true, type: "success", message: dictionary['label_success_delete_task']})
+    } else {
+      setSnackState({...snackState, open: false, type: "error", message: dictionary['label_error']})
+    }
+  }
 
   return(
     <TaskWrapper>
@@ -225,6 +237,12 @@ function Task() {
       >
         {hasTask ? dictionary['label_edit_task'] : dictionary['label_add_task']}
       </PurpleButton>
+
+      {hasTask && 
+        <TransButton className="delete-task-btn" onClick={deleteTask}>
+          {dictionary['label_delete_task']}
+        </TransButton>
+      }
 
     </TaskWrapper>
   )

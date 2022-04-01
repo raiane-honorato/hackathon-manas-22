@@ -25,5 +25,8 @@ export const dictionary = {
     'label_recurrency': 'Recorrência',
     'label_success_add_task': 'Tarefa adicionada com sucesso!',
     'label_success_edit_task': 'Tarefa alterada com sucesso!',
-    'label_error': 'Ocorreu um erro nesta operação. Tente novamente mais tarde'
+    'label_success_delete_task': 'Tarefa excluída com sucesso',
+    'label_error': 'Ocorreu um erro nesta operação. Tente novamente mais tarde',
+    'label_delete_task': 'Excluir tarefa',
+    
 }

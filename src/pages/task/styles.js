@@ -62,6 +62,7 @@ export const TaskWrapper = styled.div`
     .recurrent-wrap {
       padding: 20px;
       width: 100%;
+      margin-bottom: 10px;
       label {
         font-size: 16px;
       }
@@ -96,6 +97,10 @@ export const TaskWrapper = styled.div`
     }
 
     .add-task-btn {
-      margin-top: 100px;
+      margin-top: 80px;
+    }
+
+    .delete-task-btn {
+      margin-top: 20px;
     }
 `

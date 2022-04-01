@@ -22,6 +22,12 @@ export const WhiteButton = styled(Button)`
     color: ${ ( {theme} ) => theme.colors.primaryPurple};
 `
 
+export const TransButton = styled(Button)`
+    background-color: transparent;
+    color: ${ ( {theme} ) => theme.colors.primaryPurple};
+    border: 1px solid ${ ( {theme} ) => theme.colors.primaryPurple};
+`
+
 export const PurpleButton = styled(Button)`
     color: white;
     background-color: ${ ( {theme} ) => theme.colors.primaryPurple};

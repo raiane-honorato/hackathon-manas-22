@@ -7,12 +7,15 @@ import { getAvatar } from "./../../assets/getAvatar";
 import { Avatar, AvatarGroup, Checkbox, FormControlLabel } from "@mui/material";
 import Tutorial from "../../components/tutorial";
 import { PurpleCheckbox } from "../../styles/checkbox";
+import { formatDate } from "../../assets/formatDate";
 
 function ToDoItem({task, listId}) {
     const [users, setUsers] = useState([]);
     const [done, setDone] = useState(task.status);
     const [type, setType] = useState({});
     const [tutorialOpen, setTutorialOpen] = useState(false);
+
+    let createdDate = new Date(task.created_at);
 
     useEffect(() => {
       const promises = task.responsable_list.map(async (userId) => {
@@ -37,12 +40,11 @@ function ToDoItem({task, listId}) {
         task.created_at)
     },[done])
 
-    // console.log(type)
-
     return(
-      <ToDoItemTutorialWrap>
+      <ToDoItemTutorialWrap done={done}>
         <ToDoItemWrap>
           <div className="avatar-name-wrapp">
+            <span>{task.name}</span>
             <div className="avatar-wrapp">
               <AvatarGroup max={2}>
                 {users && users.map(user => (
@@ -50,17 +52,28 @@ function ToDoItem({task, listId}) {
                 ))}
               </AvatarGroup>
             </div>
-            <PurpleCheckbox>
-              <label className="checkbox-container">{task.name}
+            {/* <PurpleCheckbox> */}
+              {/* <label className="checkbox-container checkbox-label">{task.name}
                 <input type="checkbox" checked={done} onClick={() => setDone(!done)} ></input>
                 <span class="checkmark"></span>
               </label>
-            </PurpleCheckbox>
+            </PurpleCheckbox> */}
           </div>
+
+          <Checkbox 
+            checked={done}
+            onChange={() => setDone(!done)}
+            color="default"
+            sx={{ '& .MuiSvgIcon-root': { fontSize: 28, backgroundColor: 'white'} }}
+            className="task-checkbox"
+          />
+
+          <span>{formatDate(createdDate)}</span>
           
           {type.tutorial &&
             <CleanButton className="doubt-btn" onClick={() => setTutorialOpen(!tutorialOpen)}>?</CleanButton>
           }
+
 
         </ToDoItemWrap>
         {tutorialOpen &&

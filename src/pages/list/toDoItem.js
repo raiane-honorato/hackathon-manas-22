@@ -18,7 +18,9 @@ function ToDoItem({task, listId}) {
       const promises = task.responsable_list.map(async (userId) => {
         return await Services.getUserById(listId, userId);
       });
-      Promise.all(promises).then(res => setUsers(res.data));
+      Promise.all(promises).then(values => setUsers(values.map(value => value.data))
+      
+        );
 
       Services.getTaskTypeById(task.type_id).then(res => setType(res.data));
     },[])

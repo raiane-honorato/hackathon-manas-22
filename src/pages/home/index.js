@@ -16,7 +16,7 @@ function Home() {
   const [hasList, setHasList] = useState(false);
   
   const createNewList = () => {
-    Services.createList("Nome da lista", "").then(
+    Services.createList("", "").then(
       res => {
         setListId(res.data);
         setListLink(`${window.location.origin}/list/${res.data}`);

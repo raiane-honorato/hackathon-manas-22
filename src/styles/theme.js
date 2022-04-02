@@ -10,7 +10,8 @@ export const theme = {
 		navColor: 'rgba(242, 189, 214, 0.24)',
 		softGreen: '#D6EFEB',
         softPink: '#E8D1DC',
-        textGray: '#383838'
+        textGray: '#383838',
+        softGray: '#a3a3a3'
     }
 }
 

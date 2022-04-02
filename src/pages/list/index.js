@@ -10,11 +10,20 @@ import logoList from "./../../assets/logo_list.svg";
 import { dictionary } from "../../assets/translate";
 import ToDoItem from "./toDoItem";
 import { GreenButton, PurpleButton } from "../../styles/button";
+import SnackbarComp from "../../components/Snackbar";
 
 function List() {
   const {listId} = useParams();
   const [list, setList] = useState({});
   const [tasks, setTasks] = useState([]);
+
+  const [snackState, setSnackState] = useState({
+    open: false,
+    type: "success",
+    duration: 1000,
+    message: dictionary['abel_success_change_name'],
+    handleClose: (() => setSnackState({...snackState, open: false}))
+  });
 
   useEffect(() => {
     Services.getListById(listId).then(
@@ -28,19 +37,50 @@ function List() {
     )
   }, [listId]);
 
+  useEffect(() => {
+    console.log(list)
+  }, [list])
+
+  const handleListUpdate = () => {
+    Services.updateList(listId, list.name, list.reward).then(res => {
+      if(res.status === 204) {
+        setSnackState({...snackState, open: true, type: "success", message: dictionary['label_success_change_name']})
+      } else {
+        setSnackState(
+          {...snackState, 
+            open: false, 
+            type: "error", 
+            message: dictionary['label_error'], 
+            handleClose: (() => {
+              setSnackState({...snackState, open: false});
+              window.location.reload();
+            })
+          })
+        }
+    })}
+
   return(
     <ListWrapper>
+      <SnackbarComp
+        open={snackState.open} 
+        type={snackState.type} 
+        duration={snackState.duration} 
+        message={snackState.message} 
+        handleClose={snackState.handleClose} 
+      />
+
       <Navbar>
         <h1><NavLink to ="/"><img src={logoPurple} alt={dictionary['alt_logo']}/></NavLink></h1>
-        <div>
-          <NavLink to="/"><img src={logoReward} /></NavLink>
-          <NavLink to="/"><img src={logoTeam} /></NavLink>
-        </div>
       </Navbar>
 
       <ListName>
         <img src={logoList} />
-        <span>{list && list.name}</span>
+        <input 
+          placeholder={dictionary['label_list_name_placeholder']}
+          value={list.name}
+          onChange={event => setList({...list, name: event.target.value})}
+          onBlur={handleListUpdate}
+        ></input>
       </ListName>
 
       <ToDoWrapper>

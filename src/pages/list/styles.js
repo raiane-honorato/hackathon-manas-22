@@ -24,14 +24,9 @@ export const Navbar = styled.div`
     width: 100%;
     height: 90px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 5px 15px;
-    background-color: rgba(242, 189, 214, 0.24);
-
-    img {
-        height: 50px;
-    }
+    margin: 15px;
 
     div {
         display: flex;
@@ -51,15 +46,29 @@ export const ListName = styled.div`
         height: 50px;
     }
 
-    span {
+    input {
+        height: 35px;
         text-transform: uppercase;
         color: ${ ( {theme} ) => theme.colors.primaryPurple};
         font-weight: bold;
+        background-color: transparent;
+        border: none;
+        font-size: 18px;
+        padding: 10px;
+
+        ::placeholder {
+            color:${ ( {theme} ) => theme.colors.softGray}
+        }
+        
+        :focus {
+            outline-color: ${ ( {theme} ) => theme.colors.primaryPurple};
+        }
+
     }
 
 `
 
-export const ToDoWrapper = styled.div`
+export const ToDoWrapper = styled.section`
     width: 100%;
     display: flex;
     flex-direction: column;

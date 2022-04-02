@@ -39,5 +39,7 @@ export const dictionary = {
     'label_save_reward': 'Salvar recompensa',
     'label_reward_placeholder': 'Ex.: Ir à praia no próximo final de semana.',
     'label_alt_avatar': 'Avatar de ',
-    'label_alt_star': 'Símbolo de estrela'
+    'label_alt_star': 'Símbolo de estrela',
+    'label_success_reward': 'Recompensa salva com sucesso!',
+    'label_success_delete_list': 'Lista excluída com sucesso'
 }

@@ -30,7 +30,7 @@ function Settings() {
     )
   }, []);
 
-  useEffect(() => {console.log(users)},[users])
+  useEffect(() => {console.log(users); console.log(list)},[users, list])
 
   const [snackState, setSnackState] = useState({
     open: false,
@@ -42,6 +42,33 @@ function Settings() {
       }
       )
   });
+
+  const handleRewardUpdate = async () => {
+    const response = await Services.updateList(listId, list.name, list.reward);
+    if(response.status === 204) {
+      setSnackState({...snackState, open: true, type: "success", message: dictionary['label_success_reward']})
+    } else {
+      setSnackState({...snackState, open: false, type: "error", message: dictionary['label_error']})
+    }
+  }
+
+  const handleDeleteList = async () => {
+    const response = await Services.deleteList(listId);
+    if(response.status === 204) {
+      setSnackState({
+        ...snackState, 
+        open: true, 
+        type: "success", 
+        message: dictionary['label_success_delete_list'],
+        handleClose: (() => {
+          setSnackState({...snackState, open: false});
+          navigate("/");
+        })
+      })
+    } else {
+      setSnackState({...snackState, open: false, type: "error", message: dictionary['label_error']})
+    }
+  }
 
   return(
     <SettingsWrapper>
@@ -75,7 +102,7 @@ function Settings() {
             </AccordionSummary>
             <AccordionDetails>
               <div className="person-wrapp">
-                <span>{users.length > 0 && dictionary['label_people_desc']}</span>
+                <span>{users?.length > 0 && dictionary['label_people_desc']}</span>
                 {users && 
                 users.map(user => (<PersonItem person={user}/>))
                 }
@@ -100,16 +127,25 @@ function Settings() {
           <AccordionDetails>
             <div className="reward-wrapp">
               <span>{dictionary['label_reward_desc']}</span>
+
               <textarea 
                 placeholder={dictionary['label_reward_placeholder']}
+                value={list.reward}
+                onChange={(e) => setList({...list, reward: e.target.value})}
               ></textarea>
-              <CleanButton className="settings-btn-action">{dictionary['label_save_reward']}</CleanButton>
+
+              <CleanButton 
+              className="settings-btn-action"
+              onClick={handleRewardUpdate}
+              >
+                {dictionary['label_save_reward']}
+              </CleanButton>
             </div>
           </AccordionDetails>
         </Accordion>
         </div>
 
-        <DeleteButton>{dictionary['label_delete_list']}</DeleteButton>
+        <DeleteButton onClick={handleDeleteList}>{dictionary['label_delete_list']}</DeleteButton>
 
       </AccordionWrapper>
     </SettingsWrapper>

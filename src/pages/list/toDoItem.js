@@ -8,6 +8,7 @@ import { Avatar, AvatarGroup, Checkbox, FormControlLabel } from "@mui/material";
 import Tutorial from "../../components/tutorial";
 import { PurpleCheckbox } from "../../styles/checkbox";
 import { formatDate } from "../../assets/formatDate";
+import { useNavigate } from "react-router-dom";
 
 function ToDoItem({task, listId}) {
     const [users, setUsers] = useState([]);
@@ -15,6 +16,7 @@ function ToDoItem({task, listId}) {
     const [type, setType] = useState({});
     const [tutorialOpen, setTutorialOpen] = useState(false);
 
+    let navigate = useNavigate();
     let createdDate = new Date(task.created_at);
 
     useEffect(() => {
@@ -42,7 +44,7 @@ function ToDoItem({task, listId}) {
 
     return(
       <ToDoItemTutorialWrap done={done}>
-        <ToDoItemWrap>
+        <ToDoItemWrap done={done} onClick={() => {navigate(`/list/${listId}/task/${task.id}`)}}>
           <div className="avatar-name-wrapp">
             <span>{task.name}</span>
             <div className="avatar-wrapp">
@@ -63,6 +65,7 @@ function ToDoItem({task, listId}) {
           <Checkbox 
             checked={done}
             onChange={() => setDone(!done)}
+            onClick={(event) => {event.stopPropagation()}}
             color="default"
             sx={{ '& .MuiSvgIcon-root': { fontSize: 28, backgroundColor: 'white'} }}
             className="task-checkbox"
@@ -71,7 +74,13 @@ function ToDoItem({task, listId}) {
           <span>{formatDate(createdDate)}</span>
           
           {type.tutorial &&
-            <CleanButton className="doubt-btn" onClick={() => setTutorialOpen(!tutorialOpen)}>?</CleanButton>
+            <CleanButton 
+            className="doubt-btn" 
+            onClick={(event) => {
+              event.stopPropagation();
+              setTutorialOpen(!tutorialOpen);
+            }}
+            >?</CleanButton>
           }
 
 

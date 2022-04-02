@@ -74,7 +74,6 @@ export const ToDoItemTutorialWrap = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    filter: brightness(${props => props.done ? "50%" : "100%"});
 `
 
 export const ToDoItemWrap = styled.div`
@@ -89,6 +88,7 @@ export const ToDoItemWrap = styled.div`
     border-radius: 15px;
     color: white;
     cursor: pointer;
+    filter: brightness(${props => props.done ? "50%" : "100%"});
 
     span {
         color: white;

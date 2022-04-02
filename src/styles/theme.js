@@ -1,3 +1,4 @@
+import { red } from '@mui/material/colors';
 import { createTheme } from '@mui/styles';
 
 export const theme = {
@@ -11,7 +12,8 @@ export const theme = {
 		softGreen: '#D6EFEB',
         softPink: '#E8D1DC',
         textGray: '#383838',
-        softGray: '#a3a3a3'
+        softGray: '#a3a3a3',
+        mainRed: '#c12d2d'
     }
 }
 

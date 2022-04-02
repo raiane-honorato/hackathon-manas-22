@@ -50,7 +50,7 @@ function ToDoItem({task, listId}) {
             <div className="avatar-wrapp">
               <AvatarGroup max={2}>
                 {users && users.map(user => (
-                  <Avatar alt={user.name} src={getAvatar(user.avatar)} sx={{ width: 24, height: 24 }}/>
+                  <Avatar alt={user.name} src={getAvatar(user.avatar)} sx={{ width: 30, height: 30 }}/>
                 ))}
               </AvatarGroup>
             </div>

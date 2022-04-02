@@ -4,6 +4,9 @@ import avatar3 from "./avatar_3.png";
 import avatar4 from "./avatar_4.png";
 import avatar5 from "./avatar_5.png";
 import avatar6 from "./avatar_6.png";
+import avatar7 from "./avatar_7.png";
+import avatar8 from "./avatar_8.png";
+
 
 export const getAvatar = (avId) => {
   switch (avId){
@@ -13,5 +16,7 @@ export const getAvatar = (avId) => {
     case 4: return(avatar4);
     case 5: return(avatar5);
     case 6: return(avatar6);
+    case 7: return(avatar7);
+    case 8: return(avatar8);
   }
 }

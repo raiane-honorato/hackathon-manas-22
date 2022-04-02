@@ -20,7 +20,7 @@ export const dictionary = {
     'label_task': 'Tarefa',
     'label_how_to_do_it': 'Como fazer?',
     'label_responsable': 'Responsáveis',
-    'label_add_responsable': 'Adicionar pessoa',
+    'label_add_person': 'Adicionar pessoa',
     'label_recurrent_task': 'Tarefa recorrente',
     'label_desc_recurrent': 'Esta tarefa irá ser renovada automaticamente.',
     'label_question_recurrent': 'Renovar a tarefa a cada quantos dias?',
@@ -30,5 +30,14 @@ export const dictionary = {
     'label_success_delete_task': 'Tarefa excluída com sucesso',
     'label_error': 'Ocorreu um erro nesta operação. Tente novamente mais tarde',
     'label_delete_task': 'Excluir tarefa',
-    
+    'label_delete_list': 'Exluir lista',
+    'label_settings': 'Ajustes',
+    'label_people': 'Pessoas',
+    'label_reward': 'Recompensa',
+    'label_people_desc': 'Estas são as pessoas da sua lista.',
+    'label_reward_desc': 'Defina uma recompensa para o momento em que todas as tarefas forem concluídas.',
+    'label_save_reward': 'Salvar recompensa',
+    'label_reward_placeholder': 'Ex.: Ir à praia no próximo final de semana.',
+    'label_alt_avatar': 'Avatar de ',
+    'label_alt_star': 'Símbolo de estrela'
 }

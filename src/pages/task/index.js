@@ -33,6 +33,7 @@ function Task() {
 
   const [type, setType] = useState({});
   const [hasTask, setHasTask] = useState(false);
+  
   const [snackState, setSnackState] = useState({
     open: false,
     type: "success",

@@ -4,8 +4,7 @@ import { NavLink } from "react-router-dom";
 import Services from "../../services";
 import { ListName, ListWrapper, Navbar, ToDoWrapper } from "./styles";
 import logoPurple from "./../../assets/logo_purple.svg";
-import logoReward from "./../../assets/reward.svg";
-import logoTeam from "./../../assets/team.svg";
+import logoSettings from "./../../assets/settings_icon.svg";
 import logoList from "./../../assets/logo_list.svg";
 import { dictionary } from "../../assets/translate";
 import ToDoItem from "./toDoItem";
@@ -74,13 +73,16 @@ function List() {
       </Navbar>
 
       <ListName>
-        <img src={logoList} />
-        <input 
-          placeholder={dictionary['label_list_name_placeholder']}
-          value={list.name}
-          onChange={event => setList({...list, name: event.target.value})}
-          onBlur={handleListUpdate}
-        ></input>
+        <div>
+          <img src={logoList} className="list-icon" />
+          <input 
+            placeholder={dictionary['label_list_name_placeholder']}
+            value={list.name}
+            onChange={event => setList({...list, name: event.target.value})}
+            onBlur={handleListUpdate}
+          ></input>
+        </div>
+        <NavLink to="settings"><img src={logoSettings} className="set=icon"/></NavLink>
       </ListName>
 
       <ToDoWrapper>

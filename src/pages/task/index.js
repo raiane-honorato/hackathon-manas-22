@@ -194,7 +194,7 @@ function Task() {
           </Select>
         </FormControl>
 
-        <NavLink to="/">{dictionary['label_add_responsable']}</NavLink>
+        <NavLink to={`/list/${listId}/settings`}>{dictionary['label_add_responsable']}</NavLink>
       </div>
 
       <div className="recurrent-wrap">

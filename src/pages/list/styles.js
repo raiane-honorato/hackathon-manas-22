@@ -40,30 +40,35 @@ export const ListName = styled.div`
     display: flex;
     gap: 10px;
     align-items: center;
-    padding: 5px 15px;
+    padding: 5px 25px;
+    justify-content: space-between;
 
-    img {
-        height: 50px;
-    }
-
-    input {
-        height: 35px;
-        text-transform: uppercase;
-        color: ${ ( {theme} ) => theme.colors.primaryPurple};
-        font-weight: bold;
-        background-color: transparent;
-        border: none;
-        font-size: 18px;
-        padding: 10px;
-
-        ::placeholder {
-            color:${ ( {theme} ) => theme.colors.softGray}
+    div {
+        display: flex;
+        align-items: center;
+        .list-icon {
+            height: 50px;
         }
-        
-        :focus {
-            outline-color: ${ ( {theme} ) => theme.colors.primaryPurple};
+    
+        input {
+            height: 35px;
+            text-transform: uppercase;
+            color: ${ ( {theme} ) => theme.colors.primaryPurple};
+            font-weight: bold;
+            background-color: transparent;
+            border: none;
+            font-size: 18px;
+            padding: 10px;
+            width: 60vw;
+    
+            ::placeholder {
+                color:${ ( {theme} ) => theme.colors.softGray}
+            }
+            
+            :focus {
+                outline-color: ${ ( {theme} ) => theme.colors.primaryPurple};
+            }
         }
-
     }
 
 `

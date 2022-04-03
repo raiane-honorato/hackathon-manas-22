@@ -86,7 +86,7 @@ function ListPopUp({hasList, linkText, listOpen, setListOpen, setLinkText, listI
 
           <GreenButton className={`go-page-btn ${hasList ? 'has-list-btn' : ''}`}><NavLink to={`list/${listId}`}>{dictionary['label_go_list']}</NavLink></GreenButton>
 
-          {hasList &&
+          {hasList && listLink &&
             <div className="other-list-wrapp">
             <h3>{dictionary['label_access_recent_link']}</h3>
             {listLink.map(list => (

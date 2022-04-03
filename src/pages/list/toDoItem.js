@@ -43,7 +43,9 @@ function ToDoItem({task, listId, setUpdateList}) {
         done, 
         task.type_id, 
         task.responsable_list, 
-        task.created_at)
+        task.created_at,
+        task?.last_renewed_date
+        )
         setUpdateList(true);
     },[done])
 

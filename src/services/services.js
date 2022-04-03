@@ -157,6 +157,7 @@ const addTaskToList = async (listId, name, renew_time, status, type_id, userList
             renew_time,
             status,
             created_at: Date.now(),
+            last_renewed_date: Date.now(),
             type_id: taskTypeRef,
             responsable_list: responsableList
         });
@@ -195,7 +196,7 @@ const updateUser = async (listId, userId, avatar, name, stars) => {
     }
 };
 
-const updateTask = async (listId, taskId, name, renew_time, status, type_id, userList, created_at) => {
+const updateTask = async (listId, taskId, name, renew_time, status, type_id, userList, created_at, last_renewed_date) => {
     const taskRef = doc(db, `/list/${listId}/task_list`, taskId);
     const taskTypeRef = doc(db, "task", type_id);
     const responsableList = userList.map(userId => doc(db, `/list/${listId}/users`, userId));
@@ -204,6 +205,7 @@ const updateTask = async (listId, taskId, name, renew_time, status, type_id, use
         renew_time,
         status,
         created_at,
+        last_renewed_date,
         type_id: taskTypeRef,
         responsable_list: responsableList
     };

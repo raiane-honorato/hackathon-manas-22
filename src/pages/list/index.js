@@ -11,6 +11,7 @@ import ToDoItem from "./toDoItem";
 import { PurpleButton } from "../../styles/button";
 import SnackbarComp from "../../components/Snackbar";
 import Loading from "../../components/Loading";
+import { handleRenewTask } from "../../utils/handleRenewTask";
 
 function List() {
   const {listId} = useParams();
@@ -27,19 +28,26 @@ function List() {
     handleClose: (() => setSnackState({...snackState, open: false}))
   });
 
-  useEffect(() => {
-    setIsLoading(true);
-    Services.getListById(listId).then(
-      res => setList(res.data)
-    )
 
-    Services.getTasksList(listId).then(
-      res => {
-        setTasks(res.data);
-        setIsLoading(false);
-        setUpdateList(false);
+
+  useEffect(async () => {
+    setIsLoading(true);
+    const res1 = await Services.getListById(listId);
+    setList(res1.data);
+
+    const res2 = await Services.getTasksList(listId);
+    setTasks(res2.data);
+    if(res2.data) {
+      const renewResponse = await handleRenewTask(listId, res2.data);
+      if(renewResponse === 204) {
+        const res2 = await Services.getTasksList(listId);
+        setTasks(res2.data);
       }
-    )
+    }
+    setIsLoading(false);
+    setUpdateList(false);
+      
+    
   }, [updateList]);
 
   const handleListUpdate = () => {

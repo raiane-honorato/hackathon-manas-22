@@ -30,7 +30,8 @@ function Task() {
     status: false,
     type_id: null,
     responsable_list: [],
-    created_at: null
+    created_at: null,
+    last_renewed_date: null
   });
 
   const [type, setType] = useState({});
@@ -124,7 +125,8 @@ function Task() {
       taskState.status, 
       taskState.type_id, 
       taskState.responsable_list, 
-      taskState.created_at
+      taskState.created_at,
+      taskState.last_renewed_date
       );
       setIsLoading(false);
       if(response.status === 204) {

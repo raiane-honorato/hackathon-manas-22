@@ -25,9 +25,9 @@ function Person() {
   })
 
   useEffect(() => {
-    setIsloading(true);
     
     if(personId){
+      setIsloading(true);
       Services.getUserById(listId, personId).then(
         res => {
           setIsloading(false);

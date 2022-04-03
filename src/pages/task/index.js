@@ -153,7 +153,7 @@ function Task() {
 
       <div className="form-wrapp">
         <FormControl sx={{ width: 220 }}>
-          <InputLabel id="task-form-id">{dictionary['label_task']}</InputLabel>
+          {!taskState.type_id && <InputLabel id="task-form-id">{dictionary['label_task']}</InputLabel>}
           <Select
             labelId="task-form-id"
             value={taskState.type_id}
@@ -195,7 +195,7 @@ function Task() {
           </Select>
         </FormControl>
 
-        <NavLink to={`/list/${listId}/settings`}>{dictionary['label_add_responsable']}</NavLink>
+        <NavLink to={`/list/${listId}/settings`}>{dictionary['label_add_person']}</NavLink>
       </div>
 
       <div className="recurrent-wrap">

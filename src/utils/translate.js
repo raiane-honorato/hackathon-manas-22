@@ -61,5 +61,6 @@ export const dictionary = {
     'alt_back-btn': 'Ícone seta para a esquerda para voltar para tela anterior',
     'alt_expand_btn': 'Ícone seta para baixo para expandir o campo',
     'alt_logo_people': 'Ícone de pessoas com estrelas',
-    'alt_logo_reward': 'Ícone de recompensa. Representa um trofeu.'
+    'alt_logo_reward': 'Ícone de recompensa. Representa um trofeu.',
+    'label_access_recent_link': 'Ou acesse suas listas recentes:'
 }

@@ -28,8 +28,6 @@ function List() {
     handleClose: (() => setSnackState({...snackState, open: false}))
   });
 
-
-
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
@@ -52,6 +50,20 @@ function List() {
     fetchData();
     
   }, [updateList]);
+
+  useEffect(() => {
+    if(list.id){
+      const listLink = JSON.parse(localStorage.getItem("list"));
+      if(listLink){
+        const res = listLink.find(listElem => listElem.id === list.id);
+        if(!res) {
+          localStorage.setItem("list", JSON.stringify([...listLink, list]));
+        }
+      } else {
+        localStorage.setItem("list", JSON.stringify([list]));
+      }
+    }
+  }, [list]);
 
   const handleListUpdate = () => {
     Services.updateList(listId, list.name, list.reward).then(res => {

@@ -32,7 +32,7 @@ export const PopUpContainer = styled.div`
         justify-content: flex-end;
     }
 
-    h2 {
+    h3 {
         margin-top: 40px;
         text-align: center;
     }
@@ -43,7 +43,7 @@ export const PopUpContainer = styled.div`
 
     .link-wrapper {
         width: calc(100% - 10px);
-        margin-top: 30px;
+        
         padding: 0 10px;
         display: flex;
         flex-direction: column;
@@ -63,6 +63,26 @@ export const PopUpContainer = styled.div`
 
     .go-page-btn {
         margin-top: 120px;
+    }
+
+    .has-list-btn {
+        margin-top: 20px;
+    }
+
+    .other-list-wrapp {
+        display: flex;
+        flex-direction: column;
+
+        h3 {
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: ${ ( {theme} ) => theme.colors.primaryPurple};
+            font-weight: bold;
+            padding: 10px 0px;
+            text-align: center;
+        }
     }
 `
 

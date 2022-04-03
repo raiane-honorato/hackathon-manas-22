@@ -9,6 +9,8 @@ import SnackbarComp from "./../Snackbar";
 
 function ListPopUp({hasList, linkText, listOpen, setListOpen, setLinkText, listId, setListId}) {
 
+    const listLink = JSON.parse(localStorage.getItem("list")); 
+
     const [errorLink, setErrorLink] = useState(false);
     useEffect(() => {
         const hasList = linkText.indexOf('list/') >= 0;
@@ -62,7 +64,7 @@ function ListPopUp({hasList, linkText, listOpen, setListOpen, setLinkText, listI
           <div className="close-btn-wrapper">
               <CleanButton onClick={() => setListOpen(false)}><img src={closeIcon} alt={dictionary['alt_close_btn']}/></CleanButton>
           </div>
-          <h2>{!hasList ? dictionary['label_created_list'] : dictionary['label_access_link']}</h2>
+          <h3>{!hasList ? dictionary['label_created_list'] : dictionary['label_access_link']}</h3>
 
           <div className="link-wrapper">
 
@@ -82,8 +84,17 @@ function ListPopUp({hasList, linkText, listOpen, setListOpen, setLinkText, listI
                   {!hasList && <WhiteButton onClick={handleCopy}>{dictionary['label_copy']}</WhiteButton>}
           </div>
 
-          <GreenButton className="go-page-btn"><NavLink to={`list/${listId}`}>{dictionary['label_go_list']}</NavLink></GreenButton>
+          <GreenButton className={`go-page-btn ${hasList ? 'has-list-btn' : ''}`}><NavLink to={`list/${listId}`}>{dictionary['label_go_list']}</NavLink></GreenButton>
 
+          {hasList &&
+            <div className="other-list-wrapp">
+            <h3>{dictionary['label_access_recent_link']}</h3>
+            {listLink.map(list => (
+              <NavLink key={`list-link-${list.id}`} to={`/list/${list.id}`}>{list.name ? list.name : "Lista sem nome"}</NavLink>
+            ))}
+            </div>
+
+          }
       </PopUpContainer>
     </Modal>
     )

@@ -17,6 +17,7 @@ function List() {
   const [list, setList] = useState({});
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [updateList, setUpdateList] = useState(false);
 
   const [snackState, setSnackState] = useState({
     open: false,
@@ -36,9 +37,10 @@ function List() {
       res => {
         setTasks(res.data);
         setIsLoading(false);
+        setUpdateList(false);
       }
     )
-  }, []);
+  }, [updateList]);
 
   const handleListUpdate = () => {
     Services.updateList(listId, list.name, list.reward).then(res => {
@@ -88,7 +90,7 @@ function List() {
       <ToDoWrapper>
         {
           tasks &&
-          tasks.map((task) => (<ToDoItem task={task} listId = {listId}/>))
+          tasks.map((task) => (<ToDoItem task={task} key={`task-item-${task.id}`} listId = {listId} setUpdateList={setUpdateList}/>))
         }
       </ToDoWrapper>
 

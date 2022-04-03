@@ -121,7 +121,7 @@ function Person() {
           <span>{dictionary['label_avatar_definition']}</span>
           <ul className="avatar-fields">
             {[1,2,3,4,5,6,7,8].map(avId => 
-              <li>
+              <li key={`li-option-${avId}`}>
                 <CleanButton onClick={() => setPerson({...person, avatar: avId})}>
                   <img 
                     className={`avatar-img ${person.avatar === avId ? "avatar-active" : ""}`} 

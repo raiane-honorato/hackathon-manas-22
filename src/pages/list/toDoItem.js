@@ -10,7 +10,7 @@ import { PurpleCheckbox } from "../../styles/checkbox";
 import { formatDate } from "../../assets/formatDate";
 import { useNavigate } from "react-router-dom";
 
-function ToDoItem({task, listId}) {
+function ToDoItem({task, listId, setUpdateList}) {
     const [users, setUsers] = useState([]);
     const [done, setDone] = useState(task.status);
     const [type, setType] = useState({});
@@ -44,6 +44,7 @@ function ToDoItem({task, listId}) {
         task.type_id, 
         task.responsable_list, 
         task.created_at)
+        setUpdateList(true);
     },[done])
 
     return(
@@ -54,7 +55,7 @@ function ToDoItem({task, listId}) {
             <div className="avatar-wrapp">
               <AvatarGroup max={2}>
                 {users && users.map(user => (
-                  <Avatar alt={user?.name} src={getAvatar(user?.avatar)} sx={{ width: 30, height: 30 }}/>
+                  <Avatar alt={user?.name} key={`avatar-key-${user?.id}`} src={getAvatar(user?.avatar)} sx={{ width: 30, height: 30 }}/>
                 ))}
               </AvatarGroup>
             </div>

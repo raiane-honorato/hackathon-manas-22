@@ -9,7 +9,8 @@ import {
     deleteDoc,
     getDoc,
     query,
-    where
+    where,
+    orderBy
 } from 'firebase/firestore';
 
 const getListById = async (listId) => {
@@ -43,7 +44,8 @@ const getUsersList = async (listId) => {
 
 const getTasksList = async (listId) => {
     const taskListCollectionRef = collection(db, `/list/${listId}/task_list`);
-    const taskListSnap = await getDocs(taskListCollectionRef);
+    const q = query(taskListCollectionRef, orderBy("status"));
+    const taskListSnap = await getDocs(q);
     if (!taskListSnap.empty) {
         const taskList = taskListSnap.docs.map(doc => ({
             ...doc.data(),

@@ -112,7 +112,7 @@ function Settings() {
               <div className="person-wrapp">
                 <span>{users?.length > 0 && dictionary['label_people_desc']}</span>
                 {users && 
-                users.map(user => (<PersonItem person={user} listId={listId}/>))
+                users.map(user => (<PersonItem person={user} listId={listId} key={`person-item-${user.id}`}/>))
                 }
                 <CleanButton 
                   className="settings-btn-action"

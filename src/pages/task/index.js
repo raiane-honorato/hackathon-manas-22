@@ -188,7 +188,7 @@ function Task() {
             color="secondary"
           >
             {taskTypeList && taskTypeList.map((taskType) => {
-              return(<MenuItem value={taskType.id}>{taskType.label}</MenuItem>)
+              return(<MenuItem value={taskType.id} key={`task-option-${taskType.id}`}>{taskType.label}</MenuItem>)
             }
             )}
           </Select>
@@ -234,7 +234,7 @@ function Task() {
             color="secondary"
           >
             {users && users.map((user) => {
-              return(<MenuItem key={user.name} value={user.id}>{user.name}</MenuItem>)
+              return(<MenuItem key={`user-option-${user.id}`} value={user.id}>{user.name}</MenuItem>)
             }
             )}
           </Select>
@@ -268,7 +268,7 @@ function Task() {
                 color="secondary"
               >
                 {[1,2,3,4,5,6,7].map((value) => {
-                  return(<MenuItem value={value}>{value}</MenuItem>)
+                  return(<MenuItem value={value}key={`rec-option-${value}`}>{value}</MenuItem>)
                 }
                 )}
               </Select>

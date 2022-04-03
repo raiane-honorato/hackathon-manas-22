@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
 export const TutorialWrapper = styled.div`
+    margin-top: 5px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: ${ ( {theme} ) => theme.colors.softGreen};
+    background-color: white;
     padding: 30px;
-    transform: translateY(-12px);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     transition: all 1s ease 1s;
     position: relative;
+    border-radius: 10px;
 
     .balloon-div{
       width: 25px;
@@ -18,9 +19,10 @@ export const TutorialWrapper = styled.div`
       background-color: blue;
       position: absolute;
       top: -8px;
-      right: 20px;
+      right: 25px;
       transform: rotate(45deg);
-      background-color: ${ ( {theme} ) => theme.colors.softGreen};
+      background-color: white;
+      border-radius: 4px;
     }
 
     iframe {

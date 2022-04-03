@@ -71,7 +71,7 @@ function ToDoItem({task, listId}) {
 
           <span>{formatDate(createdDate)}</span>
           
-          {type.tutorial &&
+          {type?.tutorial &&
             <CleanButton 
             className="doubt-btn" 
             onClick={(event) => {
@@ -84,7 +84,7 @@ function ToDoItem({task, listId}) {
 
         </ToDoItemWrap>
         {tutorialOpen &&
-          <Tutorial tutorialLink={type.tutorial} onClose={() => setTutorialOpen(!tutorialOpen)}/>
+          <Tutorial tutorialLink={type?.tutorial} onClose={() => setTutorialOpen(!tutorialOpen)}/>
         }
       </ToDoItemTutorialWrap>
     )

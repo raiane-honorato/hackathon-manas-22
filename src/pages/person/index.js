@@ -1,12 +1,12 @@
 import { NavLink, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import backButton from "./../../assets/back-btn.svg";
 import { useEffect, useState } from "react";
-import { CleanButton, PurpleButton, TransButton, WhiteButton } from "../../styles/button";
+import { CleanButton, PurpleButton, TransButton } from "../../styles/button";
 import { dictionary } from "../../utils/translate";
 import Services from "../../services";
 import SnackbarComp from "../../components/Snackbar";
-import { AccordionWrapper, DeleteButton, PersonWrapper, SettingsWrapper } from "./styles";
-import { FormControl, Input, InputLabel, TextField } from "@mui/material";
+import { PersonWrapper } from "./styles";
+import { TextField } from "@mui/material";
 import {getAvatar} from "../../utils/getAvatar";
 import Loading from "../../components/Loading";
 
@@ -19,7 +19,6 @@ function Person() {
   const fromTask = searchParams.get("task") === "true";
   
   const [isLoading, setIsloading] = useState(false);
-  const [list, setList] = useState({});
   const [hasPerson, setHasPerson] = useState(false);
   const [person, setPerson] = useState({
     name: '',
@@ -129,7 +128,7 @@ function Person() {
                   <img 
                     className={`avatar-img ${person.avatar === avId ? "avatar-active" : ""}`} 
                     src={getAvatar(avId)} 
-                    alt={`${dictionary['label_alt_avatar']}${avId}`}/>
+                    alt={`${dictionary['label_alt_avatar_type']}${avId}`}/>
                 </CleanButton>
               </li>
             )}

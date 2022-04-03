@@ -1,6 +1,3 @@
-import { red } from '@mui/material/colors';
-import { createTheme } from '@mui/styles';
-
 export const theme = {
     colors: {
         primaryPurple: "#59194F",

@@ -1,8 +1,7 @@
-import { Popover } from "@mui/material";
 import { dictionary } from "../../utils/translate";
 import { TutorialWrapper } from "./styles";
 
-function Tutorial({tutorialLink, open, onClose}) {
+function Tutorial({tutorialLink}) {
   return(
     < TutorialWrapper >
     <div className="balloon-div"></div>

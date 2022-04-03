@@ -14,7 +14,6 @@ import {
 } from 'firebase/firestore';
 
 const getListById = async (listId) => {
-    const listCollectionRef = collection(db, "list");
     const listRef = doc(db, "list", listId);
     const listSnap = await getDoc(listRef);
     if (listSnap.exists()) {

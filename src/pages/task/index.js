@@ -1,4 +1,4 @@
-import { BrowserRouter, NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { TaskWrapper } from "./styles";
 import backButton from "./../../assets/back-btn.svg";
 import { useEffect, useState } from "react";
@@ -63,20 +63,23 @@ function Task() {
     )
   }, [activeCategory]);
 
-  useEffect(async () => {
-    if(taskId) {
-      setIsLoading(true);
-      const res = await Services.getTaskById(listId, taskId);
-      setTaskState(res.data);
-      setHasTask(true);
-      setIsLoading(false);
-      if(res.data.renew_time > 0) {
-        setRecurrentTask(true);
-      }
-      if(res.data.type_id === "McK01L8bsIYJRFR1ZzKG") {
-        setIsOther(true);
+  useEffect(() => {
+    async function fetchData() {
+      if(taskId) {
+        setIsLoading(true);
+        const res = await Services.getTaskById(listId, taskId);
+        setTaskState(res.data);
+        setHasTask(true);
+        setIsLoading(false);
+        if(res.data.renew_time > 0) {
+          setRecurrentTask(true);
+        }
+        if(res.data.type_id === "McK01L8bsIYJRFR1ZzKG") {
+          setIsOther(true);
+        }
       }
     }
+    fetchData();
   },[]);
 
   const handleResponsableChange = (event) => {
@@ -90,7 +93,7 @@ function Task() {
   const handleTaskTypeChange = (event) => {
     let value = event.target.value;
 
-    const selectedType = taskTypeList.filter(taskType => taskType.id == value)[0];
+    const selectedType = taskTypeList.filter(taskType => taskType.id === value)[0];
     setType(selectedType);
     if(selectedType.label === "Outro") {
       setIsOther(true);
@@ -163,14 +166,14 @@ function Task() {
         <span>{hasTask ? dictionary['label_edit_task'] : dictionary['label_add_task']}</span>
         <div className="categories-wrapp">
           <WhiteButton 
-          className={`category ${(activeCategory == 'adult') && 'cat-active'}`}
+          className={`category ${(activeCategory === 'adult') && 'cat-active'}`}
           onClick={() => setActiveCategory('adult')}
           >
             {dictionary['label_adult']}
           </WhiteButton> 
 
           <WhiteButton 
-            className={`category ${(activeCategory == 'child') && 'cat-active'}`}
+            className={`category ${(activeCategory === 'child') && 'cat-active'}`}
             onClick={() => setActiveCategory('child')}
           >
             {dictionary['label_child']}

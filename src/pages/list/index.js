@@ -30,23 +30,26 @@ function List() {
 
 
 
-  useEffect(async () => {
-    setIsLoading(true);
-    const res1 = await Services.getListById(listId);
-    setList(res1.data);
-
-    const res2 = await Services.getTasksList(listId);
-    setTasks(res2.data);
-    if(res2.data) {
-      const renewResponse = await handleRenewTask(listId, res2.data);
-      if(renewResponse === 204) {
-        const res2 = await Services.getTasksList(listId);
-        setTasks(res2.data);
+  useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true);
+      const res1 = await Services.getListById(listId);
+      setList(res1.data);
+  
+      const res2 = await Services.getTasksList(listId);
+      setTasks(res2.data);
+      if(res2.data) {
+        const renewResponse = await handleRenewTask(listId, res2.data);
+        if(renewResponse === 204) {
+          const res2 = await Services.getTasksList(listId);
+          setTasks(res2.data);
+        }
       }
+      setIsLoading(false);
+      setUpdateList(false);
     }
-    setIsLoading(false);
-    setUpdateList(false);
-      
+    
+    fetchData();
     
   }, [updateList]);
 
@@ -84,7 +87,7 @@ function List() {
 
       <ListName>
         <div>
-          <img src={logoList} className="list-icon" />
+          <img src={logoList} className="list-icon" alt={dictionary['alt_logo_list']}/>
           <input 
             placeholder={dictionary['label_list_name_placeholder']}
             value={list.name}
@@ -92,7 +95,7 @@ function List() {
             onBlur={handleListUpdate}
           ></input>
         </div>
-        <NavLink to="settings"><img src={logoSettings} className="set=icon"/></NavLink>
+        <NavLink to="settings"><img src={logoSettings} alt={dictionary['alt_logo_list']} className="set=icon"/></NavLink>
       </ListName>
 
       <ToDoWrapper>

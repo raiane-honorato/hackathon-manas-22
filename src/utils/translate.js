@@ -42,11 +42,10 @@ export const dictionary = {
     'label_alt_star': 'Símbolo de estrela',
     'label_success_reward': 'Recompensa salva com sucesso!',
     'label_success_delete_list': 'Lista excluída com sucesso',
-    'label_add_person': 'Adicionar pessoa',
     'label_edit_person': 'Salvar pessoa',
     'label_delete_person': 'Excluir pessoa',
     'label_person_name': 'Nome da pessoa',
-    'label_alt_avatar': 'Avatar do tipo ',
+    'label_alt_avatar_type': 'Avatar do tipo ',
     'label_avatar_definition': 'Selecione o avatar',
     'label_success_edit_person': 'Pessoa salva com sucesso!',
     'label_success_add_person': 'Pessoa criada com sucesso!',
@@ -56,5 +55,11 @@ export const dictionary = {
     'label_error_add_task': 'Adicione um tipo de tarefa e um responsável',
     'label_define_task_name': 'Defina um nome para a tarefa',
     'label_task_name': 'Nome da tarefa',
-    'label_see_people': 'Pessoas e pontuação'
+    'label_see_people': 'Pessoas e pontuação',
+    'alt_logo_list': 'Ícone de uma lista',
+    'alt_logo_list': 'Ícone de configurações',
+    'alt_back-btn': 'Ícone seta para a esquerda para voltar para tela anterior',
+    'alt_expand_btn': 'Ícone seta para baixo para expandir o campo',
+    'alt_logo_people': 'Ícone de pessoas com estrelas',
+    'alt_logo_reward': 'Ícone de recompensa. Representa um trofeu.'
 }

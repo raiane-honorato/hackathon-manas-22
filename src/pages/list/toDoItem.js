@@ -4,9 +4,8 @@ import Services from "../../services";
 import { ToDoItemTutorialWrap, ToDoItemWrap } from "./styles";
 import { CleanButton } from "../../styles/button";
 import { getAvatar } from "../../utils/getAvatar";
-import { Avatar, AvatarGroup, Checkbox, FormControlLabel } from "@mui/material";
+import { Avatar, AvatarGroup, Checkbox } from "@mui/material";
 import Tutorial from "../../components/tutorial";
-import { PurpleCheckbox } from "../../styles/checkbox";
 import { formatDate } from "../../utils/formatDate";
 import { useNavigate } from "react-router-dom";
 import { handleStar } from "../../utils/handleStar";
@@ -35,20 +34,23 @@ function ToDoItem({task, listId, setUpdateList, snackState, setSnackState}) {
       Services.getTaskTypeById(task.type_id).then(res => setType(res.data));
     },[])
 
-    useEffect(async () => {
-      await Services.updateTask(
-        listId, 
-        task.id, 
-        task.name, 
-        task.renew_time, 
-        done, 
-        task.type_id, 
-        task.responsable_list, 
-        task.created_at,
-        task?.last_renewed_date
-        )
-      
-        setUpdateList(true);
+    useEffect( () => {
+      async function fetchData() {
+        await Services.updateTask(
+          listId, 
+          task.id, 
+          task.name, 
+          task.renew_time, 
+          done, 
+          task.type_id, 
+          task.responsable_list, 
+          task.created_at,
+          task?.last_renewed_date
+          )
+        
+          setUpdateList(true);
+      };
+      fetchData();
     },[done])
 
     const handleDone = async () => {

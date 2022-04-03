@@ -1,12 +1,12 @@
-import { BrowserRouter, NavLink, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import backButton from "./../../assets/back-btn.svg";
 import expandButton from "./../../assets/expand_icon.svg";
 import logoPeople from "./../../assets/team.svg";
 import logoReward from "./../../assets/reward.svg";
 import { useEffect, useState } from "react";
-import { CleanButton, PurpleButton, TransButton, WhiteButton } from "../../styles/button";
+import { CleanButton } from "../../styles/button";
 import { dictionary } from "../../utils/translate";
-import { Accordion, AccordionDetails, AccordionSummary, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import Services from "../../services";
 import SnackbarComp from "../../components/Snackbar";
 import { AccordionWrapper, DeleteButton, SettingsWrapper } from "./styles";
@@ -96,7 +96,7 @@ function Settings() {
       />
 
       <div className="go-back">
-        <NavLink to={`/list/${listId}`}><img src={backButton}/></NavLink>
+        <NavLink to={`/list/${listId}`}><img src={backButton} alt={dictionary['alt_back-btn']}/></NavLink>
         <span>{onlyPeople ? dictionary['label_people'] : dictionary['label_settings']}</span>
       </div>
 
@@ -105,12 +105,12 @@ function Settings() {
         <div style={{width: '100%'}}>
           <Accordion {...props}>
             <AccordionSummary
-              expandIcon={onlyPeople ? '': <img src={expandButton}/>}
+              expandIcon={onlyPeople ? '': <img src={expandButton} alt={dictionary['alt_expand_btn']}/>}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
               <div className="settings-title-wrapp">
-                <img src={logoPeople}/>
+                <img src={logoPeople} alt={dictionary['alt_logo_people']}/>
                 <span>{dictionary['label_people']}</span>
               </div>
             </AccordionSummary>
@@ -133,12 +133,12 @@ function Settings() {
         <div style={{marginTop: '20px'}}>
         <Accordion>
           <AccordionSummary
-          expandIcon={<img src={expandButton}/>}
+          expandIcon={<img src={expandButton} alt={dictionary['alt_expand_btn']}/>}
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
             <div className="settings-title-wrapp">
-              <img src={logoReward}/>
+              <img src={logoReward} alt={dictionary['alt_logo_reward']}/>
               <span>{dictionary['label_reward']}</span>
             </div>
           </AccordionSummary>

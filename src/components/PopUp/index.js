@@ -3,7 +3,6 @@ import closeIcon from './../../assets/close_icon.svg';
 import { NavLink } from "react-router-dom";
 import { CleanButton, GreenButton, WhiteButton } from "../../styles/button";
 import { dictionary } from "../../utils/translate";
-import { Input } from "../../styles/inputs";
 import { useEffect, useState } from "react";
 import { Modal, TextField } from "@mui/material";
 import SnackbarComp from "./../Snackbar";

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const TaskWrapper = styled.div`
-    height: 100vh;
+    min-height: 100vh;
+    padding-bottom: 20px;
     width: 100%;
     display: flex;
     flex-direction: column;

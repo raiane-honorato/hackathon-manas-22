@@ -52,6 +52,9 @@ export const PersonWrapper = styled.div`
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 15px;
+        align-items: center;
+        justify-items: center;
+        padding: 0px;
 
         li {
           list-style-type: none;

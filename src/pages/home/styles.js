@@ -20,6 +20,7 @@ export const HomeContainer = styled.div`
     background-color: ${ ( {theme} ) => theme.colors.primaryPurple};
 
     p {
+        max-width: 500px;
         color: ${ ( {theme} ) => theme.colors.secondPink};
         font-family: 'Montserrat', sans-serif;
         text-align: center;

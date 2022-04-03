@@ -67,7 +67,7 @@ export const ListName = styled.div`
             border: none;
             font-size: 18px;
             padding: 10px;
-            width: 60vw;
+            width: 80%;
     
             ::placeholder {
                 color:${ ( {theme} ) => theme.colors.softGray}

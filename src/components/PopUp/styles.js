@@ -1,6 +1,10 @@
 import { TextField } from '@mui/material';
 import styled from 'styled-components';
 
+const media = {
+    desktop: '@media(min-width: 1000px)'
+}
+
 export const PopUpContainer = styled.div`
     width: 80vw;
     display: flex;
@@ -15,6 +19,12 @@ export const PopUpContainer = styled.div`
     top: 20vh;
     right: 10vw;
     padding: 16px;
+
+    ${media.desktop} {
+        width: 40vw;  
+        align-self: center;
+        right: 30vw;
+    }
 
     .close-btn-wrapper {
         width: 100%;

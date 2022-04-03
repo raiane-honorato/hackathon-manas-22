@@ -1,6 +1,6 @@
 export const dictionary = {
     'alt_logo': 'Logo do Nosso Lar. Traços de uma casa com nosso lar escrito ao meio.',
-    'text_home': 'Organize as atividades do seu lar entre todos os membros da família e crie recompensas para quem conseguir mais pontos',
+    'text_home': 'Organize as atividades do seu lar junto com todos os membros da família e crie uma recompensa para todos aproveitarem',
     'label_create_list': 'criar lista',
     'label_has_list': 'já tenho uma lista',
     'alt_close_btn': 'fechar pop up',
@@ -30,7 +30,7 @@ export const dictionary = {
     'label_success_delete_task': 'Tarefa excluída com sucesso',
     'label_error': 'Ocorreu um erro nesta operação. Tente novamente mais tarde',
     'label_delete_task': 'Excluir tarefa',
-    'label_delete_list': 'Exluir lista',
+    'label_delete_list': 'Excluir lista',
     'label_settings': 'Ajustes',
     'label_people': 'Pessoas',
     'label_reward': 'Recompensa',

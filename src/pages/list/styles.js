@@ -23,6 +23,9 @@ export const ListWrapper = styled.div`
             color: white;
         }
     }
+    .person-btn {
+        margin-bottom: 6rem;
+    }
 `
 
 export const Navbar = styled.div`

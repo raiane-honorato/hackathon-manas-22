@@ -91,13 +91,17 @@ function Task() {
   };
 
   const addTask = async () => {
+    if(!taskState.type_id || !taskState.responsable_list) {
+      setSnackState({...snackState, open: true, type: "error", message: dictionary['label_error_add_task']});
+      return;
+    }
     setIsLoading(true);
     const response = await Services.addTaskToList(listId, ...Object.values(taskState));
     setIsLoading(false);
     if(response.status === 201) {
-      setSnackState({...snackState, open: true, type: "success", message: dictionary['label_success_add_task']})
+      setSnackState({...snackState, open: true, type: "success", message: dictionary['label_success_add_task']});
     } else {
-      setSnackState({...snackState, open: false, type: "error", message: dictionary['label_error']})
+      setSnackState({...snackState, open: true, type: "error", message: dictionary['label_error']});
     }
   };
 

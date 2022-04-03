@@ -116,16 +116,7 @@ const getTaskTypeById = async (taskTypeId) => {
     } else {
         return ({status: 404});
     }
-}
-
-// getTaskById("8eJTab00sKWT4KBFOB8W", "L11xwRQmZ2KA8CZTV3IP").then(res => console.log("task id", res));
-// getListById("8eJTab00sKWT4KBFOB8W").then(res => console.log("list", res));
-// getUsersList("8eJTab00sKWT4KBFOB8W").then(res => console.log("users", res));
-// getTasksList("8eJTab00sKWT4KBFOB8W").then(res => console.log("task_list", res));
-// getUserById("8eJTab00sKWT4KBFOB8W", "gaqfAxv1Hdrbas20ANPc").then(res => console.log("user_list", res));
-// getTaskTypeById("maAAlJ7ZECv2GcwSAWzu").then(res => console.log("task_type", res));
-
-
+};
 
 const createList = async (name, reward) => {
     const listRef = collection(db, "list");
@@ -172,12 +163,6 @@ const addTaskToList = async (listId, name, renew_time, status, type_id, userList
         return ({status: 400, error: e});
     }
 };
-
-// const addResponsableToTask = async ()
-
-// addTaskToList("PeUkWfU2jxwEypw05HmF", "lista teste", 4, false, "maAAlJ7ZECv2GcwSAWzu", ['gaqfAxv1Hdrbas20ANPc'])
-
-// createList("lista teste", "recompensa").then(res => console.log(res))
 
 const updateList = async (listId, name, reward) => {
     const listDoc = doc(db, "list", listId);
@@ -228,10 +213,6 @@ const updateTask = async (listId, taskId, name, renew_time, status, type_id, use
     }
 };
 
-// updateList("8eJTab00sKWT4KBFOB8W", "lista mara", "recompensa atualizada 2").then(res => console.log(res))
-// updateUser("PeUkWfU2jxwEypw05HmF","G9oiQCc8M8KuFjqBMPzh",1,"user updated",3);
-// updateTask("8eJTab00sKWT4KBFOB8W", "L11xwRQmZ2KA8CZTV3IP", "tarefa atualizada", 7, false, 'Fu5GNMl7vdYk6Ccx8RMY', ['4SMqd7arqn4Px4ARHU6B','gaqfAxv1Hdrbas20ANPc'])
-
 const deleteList = async (listId) => {
     const listDoc = doc(db, "list", listId);
     try {
@@ -279,4 +260,4 @@ export default {
     deleteList,
     deleteUser,
     deleteTask
-}
+};

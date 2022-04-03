@@ -2,10 +2,14 @@ import { getAvatar } from "../../assets/getAvatar";
 import { dictionary } from "../../assets/translate";
 import { PersonItemWrapper } from "./styles";
 import starIcon from "../../assets/star_icon.svg";
+import { useNavigate } from "react-router-dom";
 
-function PersonItem ({person}) {
+
+function PersonItem ({person, listId}) {
+  let navigate = useNavigate();
+
   return (
-    <PersonItemWrapper>
+    <PersonItemWrapper onClick={() => {navigate(`/list/${listId}/person/${person.id}`)}}>
       <div>
         <img className="person-avatar" src={getAvatar(person.avatar)} alt={`${dictionary['label_alt_avatar']}${person.name}`}/>
         <span>{person.name}</span>

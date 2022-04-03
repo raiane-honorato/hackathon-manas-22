@@ -41,5 +41,15 @@ export const dictionary = {
     'label_alt_avatar': 'Avatar de ',
     'label_alt_star': 'Símbolo de estrela',
     'label_success_reward': 'Recompensa salva com sucesso!',
-    'label_success_delete_list': 'Lista excluída com sucesso'
+    'label_success_delete_list': 'Lista excluída com sucesso',
+    'label_add_person': 'Adicionar pessoa',
+    'label_edit_person': 'Salvar pessoa',
+    'label_delete_person': 'Excluir pessoa',
+    'label_person_name': 'Nome da pessoa',
+    'label_alt_avatar': 'Avatar do tipo ',
+    'label_avatar_definition': 'Selecione o avatar',
+    'label_success_edit_person': 'Pessoa salva com sucesso!',
+    'label_success_add_person': 'Pessoa criada com sucesso!',
+    'label_success_delete_person': 'Pessoa excluída com sucesso',
+    'label_person_error': 'Adicione um nome e um avatar'
 }

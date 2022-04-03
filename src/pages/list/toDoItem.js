@@ -50,16 +50,10 @@ function ToDoItem({task, listId}) {
             <div className="avatar-wrapp">
               <AvatarGroup max={2}>
                 {users && users.map(user => (
-                  <Avatar alt={user.name} src={getAvatar(user.avatar)} sx={{ width: 30, height: 30 }}/>
+                  <Avatar alt={user?.name} src={getAvatar(user?.avatar)} sx={{ width: 30, height: 30 }}/>
                 ))}
               </AvatarGroup>
             </div>
-            {/* <PurpleCheckbox> */}
-              {/* <label className="checkbox-container checkbox-label">{task.name}
-                <input type="checkbox" checked={done} onClick={() => setDone(!done)} ></input>
-                <span class="checkmark"></span>
-              </label>
-            </PurpleCheckbox> */}
           </div>
 
           <Checkbox 

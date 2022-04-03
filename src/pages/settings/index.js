@@ -104,9 +104,12 @@ function Settings() {
               <div className="person-wrapp">
                 <span>{users?.length > 0 && dictionary['label_people_desc']}</span>
                 {users && 
-                users.map(user => (<PersonItem person={user}/>))
+                users.map(user => (<PersonItem person={user} listId={listId}/>))
                 }
-                <CleanButton className="settings-btn-action">{dictionary['label_add_person']}</CleanButton>
+                <CleanButton 
+                  className="settings-btn-action"
+                  onClick={() => navigate(`/list/${listId}/person`)}
+                >{dictionary['label_add_person']}</CleanButton>
               </div>
             </AccordionDetails>
           </Accordion>

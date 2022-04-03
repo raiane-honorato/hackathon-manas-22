@@ -8,7 +8,7 @@ import logoSettings from "./../../assets/settings_icon.svg";
 import logoList from "./../../assets/logo_list.svg";
 import { dictionary } from "../../utils/translate";
 import ToDoItem from "./toDoItem";
-import { PurpleButton } from "../../styles/button";
+import { PurpleButton, TransButton } from "../../styles/button";
 import SnackbarComp from "../../components/Snackbar";
 import Loading from "../../components/Loading";
 import { handleRenewTask } from "../../utils/handleRenewTask";
@@ -107,6 +107,11 @@ function List() {
           {dictionary['label_add_task']}
         </NavLink>
       </PurpleButton>
+      <TransButton className="person-btn">
+        <NavLink to={`settings?people=true`}>
+          {dictionary['label_see_people']}
+        </NavLink>
+      </TransButton>
 
       <Loading open={isLoading}/>
     </ListWrapper>

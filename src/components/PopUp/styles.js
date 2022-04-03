@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material';
 import styled from 'styled-components';
 
 export const PopUpContainer = styled.div`
@@ -53,4 +54,8 @@ export const PopUpContainer = styled.div`
     .go-page-btn {
         margin-top: 120px;
     }
+`
+
+export default styled(TextField)`
+    color: blue;
 `

@@ -1,4 +1,4 @@
-import { BrowserRouter, NavLink, useNavigate, useParams } from "react-router-dom";
+import { BrowserRouter, NavLink, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import backButton from "./../../assets/back-btn.svg";
 import expandButton from "./../../assets/expand_icon.svg";
 import logoPeople from "./../../assets/team.svg";
@@ -17,6 +17,12 @@ import Loading from "../../components/Loading";
 function Settings() {
   const {listId} = useParams();
   let navigate = useNavigate();
+
+  let [searchParams, setSearchParams] = useSearchParams();
+  const onlyPeople = searchParams.get("people") === "true";
+  let props = {};
+  if(onlyPeople) {props = {expanded: true}};
+
   
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
@@ -91,15 +97,15 @@ function Settings() {
 
       <div className="go-back">
         <NavLink to={`/list/${listId}`}><img src={backButton}/></NavLink>
-        <span>{dictionary['label_settings']}</span>
+        <span>{onlyPeople ? dictionary['label_people'] : dictionary['label_settings']}</span>
       </div>
 
       <AccordionWrapper>
 
-        <div>
-          <Accordion>
+        <div style={{width: '100%'}}>
+          <Accordion {...props}>
             <AccordionSummary
-            expandIcon={<img src={expandButton}/>}
+              expandIcon={onlyPeople ? '': <img src={expandButton}/>}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
@@ -122,7 +128,8 @@ function Settings() {
             </AccordionDetails>
           </Accordion>
         </div>
-
+      {!onlyPeople && 
+      <>
         <div style={{marginTop: '20px'}}>
         <Accordion>
           <AccordionSummary
@@ -157,6 +164,8 @@ function Settings() {
         </div>
 
         <DeleteButton onClick={handleDeleteList}>{dictionary['label_delete_list']}</DeleteButton>
+      </>
+      }
 
       </AccordionWrapper>
       <Loading open={isLoading} />

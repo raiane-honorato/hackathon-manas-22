@@ -178,6 +178,28 @@ function Task() {
         </div>
       </div>
 
+      <span className="label-form">{dictionary['label_responsable']}</span>
+      <div className="form-wrapp">
+      <FormControl sx={{ width: 220 }}>
+          <InputLabel id="responsable-form-id">{dictionary['label_responsable']}</InputLabel>
+          <Select
+            labelId="responsable-form-id"
+            multiple
+            value={taskState.responsable_list}
+            label={dictionary['label_responsable']}
+            onChange={handleResponsableChange}
+            color="secondary"
+          >
+            {users && users.map((user) => {
+              return(<MenuItem key={`user-option-${user.id}`} value={user.id}>{user.name}</MenuItem>)
+            }
+            )}
+          </Select>
+        </FormControl>
+
+        <NavLink to={`/list/${listId}/person?task=true`}>{dictionary['label_add_person']}</NavLink>
+      </div>
+
       <span className="label-form">{dictionary['label_task']}</span>
       <div className="form-wrapp">
         <FormControl sx={{ width: 220 }}>
@@ -220,30 +242,7 @@ function Task() {
           />
         </div>
       </>
-
       }
-
-      <span className="label-form">{dictionary['label_responsable']}</span>
-      <div className="form-wrapp">
-      <FormControl sx={{ width: 220 }}>
-          <InputLabel id="responsable-form-id">{dictionary['label_responsable']}</InputLabel>
-          <Select
-            labelId="responsable-form-id"
-            multiple
-            value={taskState.responsable_list}
-            label={dictionary['label_responsable']}
-            onChange={handleResponsableChange}
-            color="secondary"
-          >
-            {users && users.map((user) => {
-              return(<MenuItem key={`user-option-${user.id}`} value={user.id}>{user.name}</MenuItem>)
-            }
-            )}
-          </Select>
-        </FormControl>
-
-        <NavLink to={`/list/${listId}/settings`}>{dictionary['label_add_person']}</NavLink>
-      </div>
 
       <div className="recurrent-wrap">
         <PurpleCheckbox>

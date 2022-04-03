@@ -67,7 +67,7 @@ function ToDoItem({task, listId, setUpdateList, snackState, setSnackState}) {
       if(!done) {
         const starRes = await handleStar(listId, task.responsable_list);
         if(starRes.status === 204) {
-          setSnackState({...snackState, open: true, type: "info", message: starMessage})
+          setSnackState({...snackState, open: true, type: "success", message: starMessage})
         }
       }
     }

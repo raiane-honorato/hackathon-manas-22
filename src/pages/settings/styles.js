@@ -31,6 +31,7 @@ export const SettingsWrapper = styled.div`
 
 export const AccordionWrapper = styled.div`
   padding: 30px 15px;
+  width: 100%;
 
 
   .settings-title-wrapp {

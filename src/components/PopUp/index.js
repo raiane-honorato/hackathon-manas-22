@@ -6,7 +6,7 @@ import { dictionary } from "../../utils/translate";
 import { Input } from "../../styles/inputs";
 import { useEffect, useState } from "react";
 import { Modal, TextField } from "@mui/material";
-import SnackbarComp from "../Snackbar";
+import SnackbarComp from "./../Snackbar";
 
 function ListPopUp({hasList, linkText, listOpen, setListOpen, setLinkText, listId, setListId}) {
 

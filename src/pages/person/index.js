@@ -1,4 +1,4 @@
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import backButton from "./../../assets/back-btn.svg";
 import { useEffect, useState } from "react";
 import { CleanButton, PurpleButton, TransButton, WhiteButton } from "../../styles/button";
@@ -14,6 +14,9 @@ import Loading from "../../components/Loading";
 function Person() {
   const {listId, personId} = useParams();
   let navigate = useNavigate();
+
+  let [searchParams, setSearchParams] = useSearchParams();
+  const fromTask = searchParams.get("task") === "true";
   
   const [isLoading, setIsloading] = useState(false);
   const [list, setList] = useState({});
@@ -46,7 +49,7 @@ function Person() {
     message: dictionary['label_success_add_task'],
     handleClose: (() => {
       setSnackState({...snackState, open: false});
-      navigate(`/list/${listId}/settings`);
+      navigate(fromTask ? `/list/${listId}/task` : `/list/${listId}/settings`);
       }
       )
   });
@@ -100,7 +103,7 @@ function Person() {
       />
 
       <div className="go-back">
-        <NavLink to={`/list/${listId}/settings`}><img src={backButton}/></NavLink>
+        <NavLink to={fromTask ? `/list/${listId}/task` : `/list/${listId}/settings`}><img src={backButton}/></NavLink>
         <span>{hasPerson ? dictionary['label_edit_person'] : dictionary['label_add_person']}</span>
       </div>
 

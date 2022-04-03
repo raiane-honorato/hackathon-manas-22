@@ -55,5 +55,6 @@ export const dictionary = {
     'label_success_copy': 'Link copiado com sucesso!',
     'label_error_add_task': 'Adicione um tipo de tarefa e um responsável',
     'label_define_task_name': 'Defina um nome para a tarefa',
-    'label_task_name': 'Nome da tarefa'
+    'label_task_name': 'Nome da tarefa',
+    'label_see_people': 'Pessoas e pontuação'
 }

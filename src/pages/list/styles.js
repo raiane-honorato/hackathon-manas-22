@@ -8,14 +8,19 @@ export const ListWrapper = styled.div`
     align-items: center;
     background-color: ${ ( {theme} ) => theme.colors.softPink};
 
-    .add-btn {
-        width: 220px;
-        margin-top: 6rem;
-        margin-bottom: 6rem;
-
+    .add-btn, .person-btn {
+        width: 240px;
+        margin-top: 15px;
         a {
-            color: white;
+            color: ${ ( {theme} ) => theme.colors.primaryPurple};
             text-decoration: none;
+        }
+    }
+
+    .add-btn {
+        margin-top: 6rem;
+        a{
+            color: white;
         }
     }
 `
@@ -92,6 +97,7 @@ export const ToDoItemTutorialWrap = styled.div`
 
 export const ToDoItemWrap = styled.div`
     width: 100%;
+    min-height: 126px;
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 10px;

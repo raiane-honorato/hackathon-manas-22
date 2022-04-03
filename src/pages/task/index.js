@@ -9,6 +9,7 @@ import Services from "../../services";
 import Tutorial from "../../components/tutorial";
 import { PurpleCheckbox } from "../../styles/checkbox";
 import SnackbarComp from "../../components/Snackbar";
+import Loading from "../../components/Loading";
 
 function Task() {
   const {listId, taskId} = useParams();
@@ -17,7 +18,7 @@ function Task() {
   const [activeCategory, setActiveCategory] = useState('adult');
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [recurrentTask, setRecurrentTask] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
 
   const [users, setUsers] = useState([]);
   const [taskTypeList, setTaskTypeList] = useState([]);
@@ -47,20 +48,26 @@ function Task() {
   });
 
   useEffect(() => {
+    setIsLoading(true);
     Services.getUsersList(listId).then(
       res => setUsers(res.data)
     )
 
     Services.getTaskTypeList(activeCategory).then(
-      res => setTaskTypeList(res.data)
+      res => {
+        setTaskTypeList(res.data);
+        setIsLoading(false);
+      }
     )
   }, [activeCategory]);
 
   useEffect(async () => {
     if(taskId) {
+      setIsLoading(true);
       const res = await Services.getTaskById(listId, taskId);
       setTaskState(res.data);
       setHasTask(true);
+      setIsLoading(false);
       if(res.data.renew_time > 0) {
         setRecurrentTask(true);
       }
@@ -84,8 +91,9 @@ function Task() {
   };
 
   const addTask = async () => {
+    setIsLoading(true);
     const response = await Services.addTaskToList(listId, ...Object.values(taskState));
-    console.log(response)
+    setIsLoading(false);
     if(response.status === 201) {
       setSnackState({...snackState, open: true, type: "success", message: dictionary['label_success_add_task']})
     } else {
@@ -94,6 +102,7 @@ function Task() {
   };
 
   const editTask = async () => {
+    setIsLoading(true);
     const response = await Services.updateTask(
       listId, 
       taskId, 
@@ -104,6 +113,7 @@ function Task() {
       taskState.responsable_list, 
       taskState.created_at
       );
+      setIsLoading(false);
       if(response.status === 204) {
         setSnackState({...snackState, open: true, type: "success", message: dictionary['label_success_edit_task']})
       } else {
@@ -112,7 +122,9 @@ function Task() {
   };
 
   const deleteTask = async () => {
+    setIsLoading(true);
     const response = await Services.deleteTask(listId, taskId);
+    setIsLoading(false);
     if(response.status === 204) {
       setSnackState({...snackState, open: true, type: "success", message: dictionary['label_success_delete_task']})
     } else {
@@ -245,6 +257,7 @@ function Task() {
         </TransButton>
       }
 
+      <Loading open={isLoading} />
     </TaskWrapper>
   )
 }

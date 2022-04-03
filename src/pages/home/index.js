@@ -7,6 +7,8 @@ import { useState } from "react";
 import ListPopUp from "../../components/PopUp/ListPopUp";
 import createList from "../../services/services";
 import Services from "../../services";
+import { Backdrop, CircularProgress } from "@mui/material";
+import Loading from "../../components/Loading";
 
 function Home() {
 
@@ -14,12 +16,15 @@ function Home() {
   const [listId, setListId] = useState('');
   const [listLink, setListLink] = useState('');
   const [hasList, setHasList] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   
   const createNewList = () => {
+    setIsLoading(true);
     Services.createList("", "").then(
       res => {
         setListId(res.data);
         setListLink(`${window.location.origin}/list/${res.data}`);
+        setIsLoading(false);
       });
     setListOpen(true);
   }
@@ -35,6 +40,8 @@ function Home() {
       </div>
     </HomeContainer>
     {listOpen && <ListPopUp linkText={listLink} setLinkText={setListLink} listId={listId} hasList={hasList} listOpen = {listOpen} setListOpen={setListOpen} setListId={setListId}/>}
+
+    <Loading open={isLoading} />
     </>
 
   )

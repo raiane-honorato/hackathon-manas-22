@@ -8,37 +8,37 @@ import logoSettings from "./../../assets/settings_icon.svg";
 import logoList from "./../../assets/logo_list.svg";
 import { dictionary } from "../../assets/translate";
 import ToDoItem from "./toDoItem";
-import { GreenButton, PurpleButton } from "../../styles/button";
+import { PurpleButton } from "../../styles/button";
 import SnackbarComp from "../../components/Snackbar";
+import Loading from "../../components/Loading";
 
 function List() {
   const {listId} = useParams();
   const [list, setList] = useState({});
   const [tasks, setTasks] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [snackState, setSnackState] = useState({
     open: false,
     type: "success",
     duration: 1000,
-    message: dictionary['abel_success_change_name'],
+    message: dictionary['label_success_change_name'],
     handleClose: (() => setSnackState({...snackState, open: false}))
   });
 
   useEffect(() => {
+    setIsLoading(true);
     Services.getListById(listId).then(
       res => setList(res.data)
     )
-  }, []);
 
-  useEffect(() => {
     Services.getTasksList(listId).then(
-      res => setTasks(res.data)
+      res => {
+        setTasks(res.data);
+        setIsLoading(false);
+      }
     )
-  }, [listId]);
-
-  useEffect(() => {
-    console.log(list)
-  }, [list])
+  }, []);
 
   const handleListUpdate = () => {
     Services.updateList(listId, list.name, list.reward).then(res => {
@@ -97,6 +97,8 @@ function List() {
           {dictionary['label_add_task']}
         </NavLink>
       </PurpleButton>
+
+      <Loading open={isLoading}/>
     </ListWrapper>
   )
 }

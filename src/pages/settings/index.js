@@ -11,26 +11,30 @@ import Services from "../../services";
 import SnackbarComp from "../../components/Snackbar";
 import { AccordionWrapper, DeleteButton, SettingsWrapper } from "./styles";
 import PersonItem from "./personItem";
+import Loading from "../../components/Loading";
 
 
 function Settings() {
   const {listId} = useParams();
   let navigate = useNavigate();
   
+  const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const [list, setList] = useState({});
 
   useEffect(() => {
+    setIsLoading(true);
     Services.getUsersList(listId).then(
       res => setUsers(res.data)
     )
 
     Services.getListById(listId).then(
-      res => setList(res.data)
+      res => {
+        setList(res.data);
+        setIsLoading(false);
+      }
     )
   }, []);
-
-  useEffect(() => {console.log(users); console.log(list)},[users, list])
 
   const [snackState, setSnackState] = useState({
     open: false,
@@ -44,7 +48,9 @@ function Settings() {
   });
 
   const handleRewardUpdate = async () => {
+    setIsLoading(true);
     const response = await Services.updateList(listId, list.name, list.reward);
+    setIsLoading(false);
     if(response.status === 204) {
       setSnackState({...snackState, open: true, type: "success", message: dictionary['label_success_reward']})
     } else {
@@ -53,7 +59,9 @@ function Settings() {
   }
 
   const handleDeleteList = async () => {
+    setIsLoading(true);
     const response = await Services.deleteList(listId);
+    setIsLoading(false);
     if(response.status === 204) {
       setSnackState({
         ...snackState, 
@@ -151,6 +159,7 @@ function Settings() {
         <DeleteButton onClick={handleDeleteList}>{dictionary['label_delete_list']}</DeleteButton>
 
       </AccordionWrapper>
+      <Loading open={isLoading} />
     </SettingsWrapper>
   )
 }

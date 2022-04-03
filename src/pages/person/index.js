@@ -8,13 +8,14 @@ import SnackbarComp from "../../components/Snackbar";
 import { AccordionWrapper, DeleteButton, PersonWrapper, SettingsWrapper } from "./styles";
 import { FormControl, Input, InputLabel, TextField } from "@mui/material";
 import {getAvatar} from "../../assets/getAvatar";
+import Loading from "../../components/Loading";
 
 
 function Person() {
   const {listId, personId} = useParams();
-  console.log(personId)
   let navigate = useNavigate();
   
+  const [isLoading, setIsloading] = useState(false);
   const [list, setList] = useState({});
   const [hasPerson, setHasPerson] = useState(false);
   const [person, setPerson] = useState({
@@ -24,14 +25,12 @@ function Person() {
   })
 
   useEffect(() => {
-    Services.getListById(listId).then(
-      res => setList(res.data)
-    )
+    setIsloading(true);
     
     if(personId){
       Services.getUserById(listId, personId).then(
         res => {
-          console.log("res", res);
+          setIsloading(false);
           setPerson(res.data);
           setHasPerson(true);
         }
@@ -53,7 +52,9 @@ function Person() {
   });
 
   const editPerson = async () => {
+    setIsloading(true);
     const res = await Services.updateUser(listId, personId, person.avatar, person.name, person.stars);
+    setIsloading(false);
     if(res.status === 204) {
       setSnackState({...snackState, open: true, type: "success", message: dictionary['label_success_edit_person']});
     } else {
@@ -66,8 +67,9 @@ function Person() {
       setSnackState({...snackState, open: true, type: "error", message: dictionary['label_person_error']});
       return;
     }
+    setIsloading(true);
     const res = await Services.addUserToList(listId, person.avatar, person.name, person.stars);
-    console.log(res)
+    setIsloading(false);
     if(res.status === 201) {
       setSnackState({...snackState, open: true, type: "success", message: dictionary['label_success_add_person']});
     } else {
@@ -76,7 +78,9 @@ function Person() {
   }
 
   const deletePerson = async () => {
+    setIsloading(true);
     const res = await Services.deleteUser(listId, personId);
+    setIsloading(false);
     if(res.status === 204) {
       setSnackState({...snackState, open: true, type: "success", message: dictionary['label_success_delete_person']});
     } else {
@@ -139,6 +143,8 @@ function Person() {
           <TransButton onClick={deletePerson}>{dictionary['label_delete_person']}</TransButton>
         }
       </div>
+
+      <Loading open={isLoading} />
 
     </PersonWrapper>
   )

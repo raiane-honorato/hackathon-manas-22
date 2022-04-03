@@ -24,7 +24,7 @@ function List() {
     open: false,
     type: "success",
     duration: 1000,
-    message: dictionary['label_success_change_name'],
+    message: '',
     handleClose: (() => setSnackState({...snackState, open: false}))
   });
 
@@ -98,7 +98,7 @@ function List() {
       <ToDoWrapper>
         {
           tasks &&
-          tasks.map((task) => (<ToDoItem task={task} key={`task-item-${task.id}`} listId = {listId} setUpdateList={setUpdateList}/>))
+          tasks.map((task) => (<ToDoItem task={task} key={`task-item-${task.id}`} listId = {listId} setUpdateList={setUpdateList} snackState = {snackState} setSnackState={setSnackState}/>))
         }
       </ToDoWrapper>
 

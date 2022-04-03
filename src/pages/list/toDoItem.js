@@ -9,8 +9,9 @@ import Tutorial from "../../components/tutorial";
 import { PurpleCheckbox } from "../../styles/checkbox";
 import { formatDate } from "../../utils/formatDate";
 import { useNavigate } from "react-router-dom";
+import { handleStar } from "../../utils/handleStar";
 
-function ToDoItem({task, listId, setUpdateList}) {
+function ToDoItem({task, listId, setUpdateList, snackState, setSnackState}) {
     const [users, setUsers] = useState([]);
     const [done, setDone] = useState(task.status);
     const [type, setType] = useState({});
@@ -34,8 +35,8 @@ function ToDoItem({task, listId, setUpdateList}) {
       Services.getTaskTypeById(task.type_id).then(res => setType(res.data));
     },[])
 
-    useEffect(() => {
-      Services.updateTask(
+    useEffect(async () => {
+      await Services.updateTask(
         listId, 
         task.id, 
         task.name, 
@@ -46,8 +47,31 @@ function ToDoItem({task, listId, setUpdateList}) {
         task.created_at,
         task?.last_renewed_date
         )
+      
         setUpdateList(true);
     },[done])
+
+    const handleDone = async () => {
+      const starMessage = (
+        <>
+          <AvatarGroup max={2} sx={{display: 'inline'}}>
+            {users && users.map(user => (
+              <Avatar alt={user?.name} key={`avatar-key-${user?.id}`} src={getAvatar(user?.avatar)} sx={{ width: 30, height: 30 }}/>
+            ))}
+          </AvatarGroup>
+          Usuários receberam uma estrela!
+        </>
+      )
+
+      setDone(!done);
+      if(!done) {
+        const starRes = await handleStar(listId, task.responsable_list);
+        if(starRes.status === 204) {
+          setSnackState({...snackState, open: true, type: "info", message: starMessage})
+        }
+      }
+    }
+
 
     return(
       <ToDoItemTutorialWrap done={done}>
@@ -65,7 +89,7 @@ function ToDoItem({task, listId, setUpdateList}) {
 
           <Checkbox 
             checked={done}
-            onChange={() => setDone(!done)}
+            onChange={handleDone}
             onClick={(event) => {event.stopPropagation()}}
             color="default"
             sx={{ '& .MuiSvgIcon-root': { fontSize: 28, backgroundColor: 'white'} }}

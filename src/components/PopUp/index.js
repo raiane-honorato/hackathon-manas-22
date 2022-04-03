@@ -2,11 +2,11 @@ import { PopUpContainer } from "./styles";
 import closeIcon from './../../assets/close_icon.svg';
 import { NavLink } from "react-router-dom";
 import { CleanButton, GreenButton, WhiteButton } from "../../styles/button";
-import { dictionary } from "../../assets/translate";
+import { dictionary } from "../../utils/translate";
 import { Input } from "../../styles/inputs";
 import { useEffect, useState } from "react";
 import { Modal, TextField } from "@mui/material";
-import SnackbarComp from "./../Snackbar";
+import SnackbarComp from "../Snackbar";
 
 function ListPopUp({hasList, linkText, listOpen, setListOpen, setLinkText, listId, setListId}) {
 

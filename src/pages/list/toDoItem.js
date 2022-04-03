@@ -3,11 +3,11 @@ import { useState } from "react";
 import Services from "../../services";
 import { ToDoItemTutorialWrap, ToDoItemWrap } from "./styles";
 import { CleanButton } from "../../styles/button";
-import { getAvatar } from "./../../assets/getAvatar";
+import { getAvatar } from "../../utils/getAvatar";
 import { Avatar, AvatarGroup, Checkbox, FormControlLabel } from "@mui/material";
 import Tutorial from "../../components/tutorial";
 import { PurpleCheckbox } from "../../styles/checkbox";
-import { formatDate } from "../../assets/formatDate";
+import { formatDate } from "../../utils/formatDate";
 import { useNavigate } from "react-router-dom";
 
 function ToDoItem({task, listId, setUpdateList}) {

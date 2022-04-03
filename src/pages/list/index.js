@@ -6,7 +6,7 @@ import { ListName, ListWrapper, Navbar, ToDoWrapper } from "./styles";
 import logoPurple from "./../../assets/logo_purple.svg";
 import logoSettings from "./../../assets/settings_icon.svg";
 import logoList from "./../../assets/logo_list.svg";
-import { dictionary } from "../../assets/translate";
+import { dictionary } from "../../utils/translate";
 import ToDoItem from "./toDoItem";
 import { PurpleButton } from "../../styles/button";
 import SnackbarComp from "../../components/Snackbar";

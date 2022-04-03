@@ -1,10 +1,10 @@
 import { HomeContainer } from "./styles";
 import logoPurple from "./../../assets/logo_purple.svg";
 import logoWhite from "./../../assets/logo_white.svg";
-import { dictionary } from "../../assets/translate";
+import { dictionary } from "../../utils/translate";
 import { Button, WhiteButton } from "../../styles/button";
 import { useState } from "react";
-import ListPopUp from "../../components/PopUp/ListPopUp";
+import ListPopUp from "../../components/PopUp";
 import createList from "../../services/services";
 import Services from "../../services";
 import { Backdrop, CircularProgress } from "@mui/material";

@@ -1,5 +1,5 @@
 import { Popover } from "@mui/material";
-import { dictionary } from "../../assets/translate";
+import { dictionary } from "../../utils/translate";
 import { TutorialWrapper } from "./styles";
 
 function Tutorial({tutorialLink, open, onClose}) {

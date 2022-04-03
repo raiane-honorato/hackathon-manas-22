@@ -2,12 +2,12 @@ import { NavLink, useNavigate, useParams } from "react-router-dom";
 import backButton from "./../../assets/back-btn.svg";
 import { useEffect, useState } from "react";
 import { CleanButton, PurpleButton, TransButton, WhiteButton } from "../../styles/button";
-import { dictionary } from "../../assets/translate";
+import { dictionary } from "../../utils/translate";
 import Services from "../../services";
 import SnackbarComp from "../../components/Snackbar";
 import { AccordionWrapper, DeleteButton, PersonWrapper, SettingsWrapper } from "./styles";
 import { FormControl, Input, InputLabel, TextField } from "@mui/material";
-import {getAvatar} from "../../assets/getAvatar";
+import {getAvatar} from "../../utils/getAvatar";
 import Loading from "../../components/Loading";
 
 

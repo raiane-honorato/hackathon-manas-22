@@ -3,7 +3,7 @@ import { TaskWrapper } from "./styles";
 import backButton from "./../../assets/back-btn.svg";
 import { useEffect, useState } from "react";
 import { CleanButton, PurpleButton, TransButton, WhiteButton } from "../../styles/button";
-import { dictionary } from "../../assets/translate";
+import { dictionary } from "../../utils/translate";
 import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import Services from "../../services";
 import Tutorial from "../../components/tutorial";

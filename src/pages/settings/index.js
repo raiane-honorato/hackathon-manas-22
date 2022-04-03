@@ -5,7 +5,7 @@ import logoPeople from "./../../assets/team.svg";
 import logoReward from "./../../assets/reward.svg";
 import { useEffect, useState } from "react";
 import { CleanButton, PurpleButton, TransButton, WhiteButton } from "../../styles/button";
-import { dictionary } from "../../assets/translate";
+import { dictionary } from "../../utils/translate";
 import { Accordion, AccordionDetails, AccordionSummary, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import Services from "../../services";
 import SnackbarComp from "../../components/Snackbar";

@@ -1,5 +1,5 @@
-import { getAvatar } from "../../assets/getAvatar";
-import { dictionary } from "../../assets/translate";
+import { getAvatar } from "../../utils/getAvatar";
+import { dictionary } from "../../utils/translate";
 import { PersonItemWrapper } from "./styles";
 import starIcon from "../../assets/star_icon.svg";
 import { useNavigate } from "react-router-dom";

@@ -53,5 +53,7 @@ export const dictionary = {
     'label_success_delete_person': 'Pessoa excluída com sucesso',
     'label_person_error': 'Adicione um nome e um avatar',
     'label_success_copy': 'Link copiado com sucesso!',
-    'label_error_add_task': 'Adicione um tipo de tarefa e um responsável'
+    'label_error_add_task': 'Adicione um tipo de tarefa e um responsável',
+    'label_define_task_name': 'Defina um nome para a tarefa',
+    'label_task_name': 'Nome da tarefa'
 }

@@ -43,8 +43,15 @@ export const TaskWrapper = styled.div`
       }
     }
 
+    .label-form {
+      width: 100%;
+      padding: 25px 0px 0px 20px;
+      color: ${ ( {theme} ) => theme.colors.primaryPurple};
+      font-weight: 600;
+    }
+
     .form-wrapp {
-      padding: 25px 20px;
+      padding: 15px 20px;
       width: 100%;
       display: flex;
       justify-content: space-between;

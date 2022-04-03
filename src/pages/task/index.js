@@ -4,7 +4,7 @@ import backButton from "./../../assets/back-btn.svg";
 import { useEffect, useState } from "react";
 import { CleanButton, PurpleButton, TransButton, WhiteButton } from "../../styles/button";
 import { dictionary } from "../../assets/translate";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import Services from "../../services";
 import Tutorial from "../../components/tutorial";
 import { PurpleCheckbox } from "../../styles/checkbox";
@@ -19,6 +19,7 @@ function Task() {
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [recurrentTask, setRecurrentTask] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isOther, setIsOther] = useState(false);
 
   const [users, setUsers] = useState([]);
   const [taskTypeList, setTaskTypeList] = useState([]);
@@ -71,6 +72,9 @@ function Task() {
       if(res.data.renew_time > 0) {
         setRecurrentTask(true);
       }
+      if(res.data.type_id === "McK01L8bsIYJRFR1ZzKG") {
+        setIsOther(true);
+      }
     }
   },[]);
 
@@ -87,6 +91,11 @@ function Task() {
 
     const selectedType = taskTypeList.filter(taskType => taskType.id == value)[0];
     setType(selectedType);
+    if(selectedType.label === "Outro") {
+      setIsOther(true);
+      setTaskState({...taskState, type_id: value});
+      return;
+    }
     setTaskState({...taskState, type_id: value, name: selectedType.label});
   };
 
@@ -167,6 +176,7 @@ function Task() {
         </div>
       </div>
 
+      <span className="label-form">{dictionary['label_task']}</span>
       <div className="form-wrapp">
         <FormControl sx={{ width: 220 }}>
           {!taskState.type_id && <InputLabel id="task-form-id">{dictionary['label_task']}</InputLabel>}
@@ -184,15 +194,34 @@ function Task() {
           </Select>
         </FormControl>
 
+        {!isOther && 
         <CleanButton onClick={() => setTutorialOpen(!tutorialOpen)}>
           {dictionary['label_how_to_do_it']}
         </CleanButton>
+        }
       </div>
 
       {tutorialOpen &&
         <Tutorial tutorialLink={type.tutorial} onClose={() => setTutorialOpen(!tutorialOpen)}/>
       }
 
+      {isOther &&
+      <>
+        <span className="label-form">{dictionary['label_define_task_name']}</span>
+        <div className="form-wrapp">
+        <TextField
+            labelId="task-form-id"
+            value={taskState.name}
+            label={dictionary['label_task_name']}
+            onChange={(e) => {setTaskState({...taskState, name:e.target.value})}}
+            color="secondary"
+          />
+        </div>
+      </>
+
+      }
+
+      <span className="label-form">{dictionary['label_responsable']}</span>
       <div className="form-wrapp">
       <FormControl sx={{ width: 220 }}>
           <InputLabel id="responsable-form-id">{dictionary['label_responsable']}</InputLabel>

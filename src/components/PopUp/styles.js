@@ -10,7 +10,7 @@ export const PopUpContainer = styled.div`
     border-radius: 10px;
     border: 1px solid black;
     position: absolute;
-    height: 60vh;
+    min-height: 60vh;
     top: 20vh;
     right: 10vw;
     padding: 16px;

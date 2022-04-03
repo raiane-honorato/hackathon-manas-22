@@ -51,5 +51,6 @@ export const dictionary = {
     'label_success_edit_person': 'Pessoa salva com sucesso!',
     'label_success_add_person': 'Pessoa criada com sucesso!',
     'label_success_delete_person': 'Pessoa excluída com sucesso',
-    'label_person_error': 'Adicione um nome e um avatar'
+    'label_person_error': 'Adicione um nome e um avatar',
+    'label_success_copy': 'Link copiado com sucesso!'
 }

@@ -6,6 +6,7 @@ import { dictionary } from "../../assets/translate";
 import { Input } from "../../styles/inputs";
 import { useEffect, useState } from "react";
 import { Modal, TextField } from "@mui/material";
+import SnackbarComp from "./../Snackbar";
 
 function ListPopUp({hasList, linkText, listOpen, setListOpen, setLinkText, listId, setListId}) {
 
@@ -26,9 +27,22 @@ function ListPopUp({hasList, linkText, listOpen, setListOpen, setLinkText, listI
 
     }, [linkText, listId])
 
+    const [snackState, setSnackState] = useState({
+      open: false,
+      type: "success",
+      duration: 1000,
+      message: dictionary['label_success_copy'],
+      handleClose: (() => {
+        setSnackState({...snackState, open: false});
+        }
+        )
+    });
+
     const handleCopy = () => {
-      navigator.clipboard.writeText(linkText)
+      navigator.clipboard.writeText(linkText);
+      setSnackState({...snackState, open: true})
     };
+
 
     return(
     <Modal
@@ -36,7 +50,16 @@ function ListPopUp({hasList, linkText, listOpen, setListOpen, setLinkText, listI
       onClose={() => setListOpen(false)}
       className="teste"
     >
+
+
       <PopUpContainer>
+      <SnackbarComp
+        open={snackState.open} 
+        type={snackState.type} 
+        duration={snackState.duration} 
+        message={snackState.message} 
+        handleClose={snackState.handleClose} 
+      />
           <div className="close-btn-wrapper">
               <CleanButton onClick={() => setListOpen(false)}><img src={closeIcon} alt={dictionary['alt_close_btn']}/></CleanButton>
           </div>

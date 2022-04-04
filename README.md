@@ -5,6 +5,8 @@ This project was created in the Hackathon das Manas challenge. It is a response 
 
 By creating a space for the family to define tasks collectively, learn to do them and monitor their execution, the Nosso Lar platform seeks to promote awareness of domestic service and a better division of tasks in the home.
 
+<img src="https://github.com/raiane-honorato/hackathon-manas-22/blob/master/iphone-frame.png" width="250" alt="application phone frame">
+
 ## Main resources
 This project uses:
 * Firebase as a back-end service
